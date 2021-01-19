@@ -10,8 +10,10 @@ def index(request):
 
 
 def post(request, pk):
+    posts = Post.objects.filter(pk=pk)
     context = {
         'page_title': 'хабр',
+        'posts': posts
     }
     return render(request, 'mainapp/post.html', context)
 
@@ -21,3 +23,4 @@ def help(request):
         'page_title': 'помощь',
     }
     return render(request, 'mainapp/help.html', context)
+
