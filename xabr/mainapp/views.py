@@ -14,3 +14,10 @@ def post(request, pk):
         'page_title': 'хабр',
     }
     return render(request, 'mainapp/post.html', context)
+
+
+def help(request):
+    context = {
+        'page_title': 'помощь',
+    }
+    return render(request, 'mainapp/help.html', context)
