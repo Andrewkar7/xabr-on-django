@@ -22,9 +22,16 @@ def help(request):
     }
     return render(request, 'mainapp/help.html', context)
 
+
 def design(request):
     context = {
         'page_title': 'дизайн',
     }
     return render(request, 'mainapp/design.html', context)
 
+
+def web_development(request):
+    context = {
+        'page_title': 'веб-разработка',
+    }
+    return render(request, 'mainapp/web-development.html', context)
