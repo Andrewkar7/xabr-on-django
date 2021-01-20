@@ -6,15 +6,13 @@
     {% include 'mainapp/includes/inc__main_menu.html' %}
 {% endblock %}
 {% block main %}
-
     <div class="row">
         <div class="col-md-12 blog-main">
+            {% for post in posts %}
             <h3 class="pb-4 mb-4 font-italic border-bottom">
-                From the Firehose
+                {{post.category}}
             </h3>
             <div class="blog-post">
-                {% for post in posts %}
-                <h3 class="blog-post-title">{{post.category}}</h3>
                 <h2 class="blog-post-title">{{post.name}}</h2>
                 <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
                 <p>Краткое описание</p>
