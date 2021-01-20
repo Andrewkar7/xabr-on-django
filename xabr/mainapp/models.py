@@ -19,6 +19,7 @@ class Post(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     name = models.CharField(verbose_name='название статьи', max_length=128)
     description = models.TextField(verbose_name='описание статьи', blank=True)
+    posts_text = models.TextField(verbose_name='текст статьи', blank=True)
     create_datetime = models.DateField(verbose_name='дата создания',
                                        auto_now_add=True,
                                        blank=True)  # необходимо указывать в [default: timezone.now] >>> timezone.now

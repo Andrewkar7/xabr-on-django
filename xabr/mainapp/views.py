@@ -35,3 +35,10 @@ def web_development(request):
         'page_title': 'веб-разработка',
     }
     return render(request, 'mainapp/web-development.html', context)
+
+
+def mobile_development(request):
+    context = {
+        'page_title': 'мобильная-разработка',
+    }
+    return render(request, 'mainapp/mobile-development.html', context)
