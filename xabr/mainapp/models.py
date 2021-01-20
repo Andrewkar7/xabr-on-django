@@ -18,6 +18,8 @@ class Post(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     name = models.CharField(verbose_name='название статьи', max_length=128)
     description = models.TextField(verbose_name='описание статьи', blank=True)
+    create_datetime = models.DateTimeField('дата создания', auto_now_add=True)
+
 
     def __str__(self):
         return f"{self.name} ({self.category.name})"
