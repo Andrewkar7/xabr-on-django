@@ -2,30 +2,16 @@
 <div class="header">
     <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
-            <a class="p-2 text-muted" href="#">Дизайн</a>
-            <a class="p-2 text-muted" href="#">Веб-разработка</a>
-            <a class="p-2 text-muted" href="#">Мобильная разработка</a>
-            <a class="p-2 text-muted" href="#">Маркетинг</a>
+            <a class="p-2 {% if request.resolver_match.url_name == 'design' %} text-body {% else %} text-muted {% endif %} "
+               href="{% url 'main:design' %}">Дизайн</a>
+            <a class="p-2 {% if request.resolver_match.url_name == 'web_development' %} text-body {% else %} text-muted {% endif %} "
+               href="{% url 'main:web_development' %}">Веб-разработка</a>
+            <a class="p-2 {% if request.resolver_match.url_name == 'mobile_development' %} text-body {% else %} text-muted {% endif %} "
+               href="{% url 'main:mobile_development' %}">Мобильная разработка</a>
+            <a class="p-2 {% if request.resolver_match.url_name == 'marketing' %} text-body {% else %} text-muted {% endif %} "
+               href="{% url 'main:marketing' %}">Маркетинг</a>
+
         </nav>
     </div>
-    {#    <a href="{% url 'main:index' %}" class="logo"></a>#}
-    {#    <ul class="menu">#}
-    {#        <li>#}
-    {#            <a href="{% url 'main:index' %}" class="active">#}
-    {#                домой#}
-    {#            </a>#}
-    {#        </li>#}
-    {#        <li>#}
-    {#            <a href="{% url 'main:products' %}">#}
-    {#                продукты#}
-    {#            </a>#}
-    {#        </li>#}
-    {#        <li>#}
-    {#            <a href="{% url 'main:contact' %}">#}
-    {#                контакты#}
-    {#            </a>#}
-    {#        </li>#}
-    {#    </ul>#}
-    {#    <a href="#" class="search"></a>#}
-    {#    <a href="#" class="basket"></a>#}
 </div>
+

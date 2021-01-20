@@ -14,10 +14,9 @@
             </h3>
             <div class="blog-post">
                 <h2 class="blog-post-title">{{post.name}}</h2>
-                <p class="blog-post-meta">January 1, 2014 by <a href="#">Mark</a></p>
-                <p>Краткое описание</p>
+                <p class="blog-post-meta">{{post.create_datetime}} <a href="#">Mark</a></p>
                 <hr>
-                <p>{{post.description}}</p>
+                <p>{{post.posts_text}}</p>
                 {% endfor %}
             </div><!-- /.blog-post -->
 
