@@ -20,9 +20,9 @@ class Post(models.Model):
     name = models.CharField(verbose_name='название статьи', max_length=128)
     description = models.TextField(verbose_name='описание статьи', blank=True)
     posts_text = models.TextField(verbose_name='текст статьи', blank=True)
-    create_datetime = models.DateField(verbose_name='дата создания',
-                                       auto_now_add=True,
-                                       blank=True)  # необходимо указывать в [default: timezone.now] >>> timezone.now
+    create_datetime = models.DateTimeField(verbose_name='дата создания', auto_now_add=True, blank=True)
+
+    # при makemigrations необходимо указывать в [default: timezone.now] >>> timezone.now
 
     def __str__(self):
         return f"{self.name} ({self.category.name})"
