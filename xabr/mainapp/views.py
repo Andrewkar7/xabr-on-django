@@ -42,3 +42,10 @@ def mobile_development(request):
         'page_title': 'мобильная-разработка',
     }
     return render(request, 'mainapp/mobile-development.html', context)
+
+
+def marketing(request):
+    context = {
+        'page_title': 'маркетинг',
+    }
+    return render(request, 'mainapp/marketing.html', context)
