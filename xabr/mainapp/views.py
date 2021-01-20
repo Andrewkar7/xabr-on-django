@@ -14,3 +14,17 @@ def post(request, pk):
         'page_title': 'хабр',
     }
     return render(request, 'mainapp/post.html', context)
+
+
+def help(request):
+    context = {
+        'page_title': 'помощь',
+    }
+    return render(request, 'mainapp/help.html', context)
+
+def design(request):
+    context = {
+        'page_title': 'дизайн',
+    }
+    return render(request, 'mainapp/design.html', context)
+
