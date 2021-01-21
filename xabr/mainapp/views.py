@@ -1,14 +1,15 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Category, Post
 
-def get_menu():
-    print(Category.objects.all())
-    return Category.objects.all()
 
 def index(request):
+    posts = Post.objects.all().order_by('-create_datetime')
+    categories = Category.objects.all()
+
     context = {
         'page_title': 'главная',
-        'categories': get_menu(),
+        'posts': posts,
+        'categories': categories,
     }
     return render(request, 'mainapp/index.html', context)
 
@@ -29,17 +30,18 @@ def help(request):
     return render(request, 'mainapp/help.html', context)
 
 
+
 def category_page(request, pk):
 
+    categories = Category.objects.all()
     if pk == '0':
         category = {'pk': 0, 'name': 'все'}
     else:
         category = get_object_or_404(Category, pk=pk)
 
-
     context = {
         'page_title': 'главная',
-        'categories': get_menu(),
+        'categories': categories,
         'category': category,
     }
     return render(request, 'mainapp/category_page.html', context)
