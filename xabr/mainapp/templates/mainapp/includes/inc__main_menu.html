@@ -11,6 +11,8 @@
 
 
 
+
+
         <nav class="nav d-flex justify-content-between">
             {% for item in categories %}
                 <li><a class="p-2 text-muted" href="{% url 'main:category_page' item.pk %}">{{item.name}}</a></li>

@@ -6,8 +6,6 @@ def get_menu():
     return Category.objects.all()
 
 def index(request):
-
-
     context = {
         'page_title': 'главная',
         'categories': get_menu(),
