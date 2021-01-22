@@ -16,16 +16,20 @@ def index(request):
 
 def post(request, pk):
     posts = Post.objects.filter(pk=pk)
+    categories = Category.objects.all()
     context = {
         'page_title': 'хабр',
-        'posts': posts
+        'posts': posts,
+        'categories': categories,
     }
     return render(request, 'mainapp/post.html', context)
 
 
 def help(request):
+    categories = Category.objects.all()
     context = {
         'page_title': 'помощь',
+        'categories': categories,
     }
     return render(request, 'mainapp/help.html', context)
 
