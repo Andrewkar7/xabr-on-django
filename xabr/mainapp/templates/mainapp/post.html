@@ -9,15 +9,15 @@
     <div class="row">
         <div class="col-md-12 blog-main">
             {% for post in posts %}
-            <h3 class="pb-4 mb-4 font-italic border-bottom">
-                {{post.category}}
-            </h3>
-            <div class="blog-post">
-                <h2 class="blog-post-title">{{post.name}}</h2>
-                <p class="blog-post-meta">{{post.create_datetime}} <a href="#">Mark</a></p>
+                <h3 class="pb-4 mb-4 font-italic border-bottom">
+                    {{ post.category }}
+                </h3>
+                <div class="blog-post">
+                <h2 class="blog-post-title">{{ post.name }}</h2>
+                <p class="blog-post-meta">{{ post.create_datetime }} <a href="#">Mark</a></p>
                 <hr>
-                <p>{{post.posts_text}}</p>
-                {% endfor %}
+                <p>{{ post.posts_text }}</p>
+            {% endfor %}
             </div><!-- /.blog-post -->
 
             <nav class="blog-pagination">
