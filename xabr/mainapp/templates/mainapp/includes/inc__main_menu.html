@@ -1,10 +1,11 @@
 {% load static %}
 <div class="header">
-    <div class="nav-scroller py-1 mb-2 ">
+    <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
                 {% for category in categories %}
-                    <a class="p-2 text-body {% if request.resolver_match.kwargs.pk|add:0 == category.pk %} {%else %} text-muted {% endif%}" href="{% url 'main:category_page' category.pk %}">{{category.name}}</a>
+                    <a class="p-2 text-muted" href="{% url 'main:category_page' category.slug %}">{{category.name}}</a>
                 {% endfor %}
         </nav>
     </div>
 </div>
+
