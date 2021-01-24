@@ -1,17 +1,10 @@
 {% load static %}
 <div class="header">
-    <div class="nav-scroller py-1 mb-2">
+    <div class="nav-scroller py-1 mb-2 ">
         <nav class="nav d-flex justify-content-between">
-            <a class="p-2 {% if request.resolver_match.url_name == 'design' %} text-body {% else %} text-muted {% endif %} "
-               href="{% url 'main:design' %}">Дизайн</a>
-            <a class="p-2 {% if request.resolver_match.url_name == 'web_development' %} text-body {% else %} text-muted {% endif %} "
-               href="{% url 'main:web_development' %}">Веб-разработка</a>
-            <a class="p-2 {% if request.resolver_match.url_name == 'mobile_development' %} text-body {% else %} text-muted {% endif %} "
-               href="{% url 'main:mobile_development' %}">Мобильная разработка</a>
-            <a class="p-2 {% if request.resolver_match.url_name == 'marketing' %} text-body {% else %} text-muted {% endif %} "
-               href="{% url 'main:marketing' %}">Маркетинг</a>
-
+                {% for category in categories %}
+                    <a class="p-2 text-body {% if request.resolver_match.kwargs.pk|add:0 == category.pk %} {%else %} text-muted {% endif%}" href="{% url 'main:category_page' category.pk %}">{{category.name}}</a>
+                {% endfor %}
         </nav>
     </div>
 </div>
-
