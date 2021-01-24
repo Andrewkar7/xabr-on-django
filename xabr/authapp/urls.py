@@ -1,13 +1,11 @@
-import mainapp.views as mainapp
 from django.urls import path
+import authapp.views as authapp
 
 
-app_name = 'mainapp'
+app_name = 'authapp'
 
 urlpatterns = [
-    path('', mainapp.index, name='index'),
-    path('post/<slug:slug>/', mainapp.post, name='post'),
-    path('help/', mainapp.help, name='help'),
-    path('category/<slug:slug>/', mainapp.category_page, name='category_page'),
+    #path('', authapp.index, name='index'),
+
 ]
 
