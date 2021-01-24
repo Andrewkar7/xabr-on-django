@@ -13,7 +13,7 @@
             </h3>
             {% for post in posts %}
             <div class="blog-post">
-                <h2 class="blog-post-title"><a href="{% url 'main:post' post.id %}">{{post.name}}</a></h2>
+                <h2 class="blog-post-title"><a href="{% url 'main:post' post.slug %}">{{post.name}}</a></h2>
                 <p class="blog-post-meta">{{post.create_datetime}} <a href="#">Mark</a></p>
 
                 <p>{{post.description}}</p>
