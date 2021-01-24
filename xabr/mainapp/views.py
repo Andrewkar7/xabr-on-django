@@ -14,40 +14,33 @@ def index(request):
     return render(request, 'mainapp/index.html', context)
 
 
-def post(request, pk):
-    posts = Post.objects.filter(pk=pk)
-    categories = Category.objects.all()
+def post(request, slug):
+    posts = Post.objects.filter(slug=slug)
     context = {
         'page_title': 'хабр',
-        'posts': posts,
-        'categories': categories
+        'posts': posts
     }
     return render(request, 'mainapp/post.html', context)
 
 
 def help(request):
-    categories = Category.objects.all()
     context = {
         'page_title': 'помощь',
-        'categories': categories
     }
     return render(request, 'mainapp/help.html', context)
 
 
-def category_page(request, pk):
-    categories = Category.objects.all()
+def category_page(request, slug):
 
-    if pk == '0':
-        category = {'pk': 0, 'name': 'все'}
-        posts = Post.objects.all().order_by('-create_datetime')
+    categories = Category.objects.all()
+    if slug == '':
+        category = {'slug': '', 'name': 'все'}
     else:
-        category = get_object_or_404(Category, pk=pk)
-        posts = category.post_set.order_by('-create_datetime')
+        category = get_object_or_404(Category, slug=slug)
 
     context = {
         'page_title': 'главная',
         'categories': categories,
         'category': category,
-        'posts': posts,
     }
     return render(request, 'mainapp/category_page.html', context)
