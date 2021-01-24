@@ -17,14 +17,11 @@
                 <p class="blog-post-meta">{{post.create_datetime}} <a href="#">Mark</a></p>
                 <hr>
                 <p>{{post.posts_text}}</p>
+            <nav class="blog-pagination">
+                <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Комментировать</a>
+            </nav>
                 {% endfor %}
             </div><!-- /.blog-post -->
-
-            <nav class="blog-pagination">
-                <a class="btn btn-outline-primary" href="#">Older</a>
-                <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Newer</a>
-            </nav>
-
         </div><!-- /.blog-main -->
     </div><!-- /.row -->
 {% endblock %}
