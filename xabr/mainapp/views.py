@@ -1,21 +1,18 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from .models import Category, Post
 
 
 def index(request):
     posts = Post.objects.all().order_by('-create_datetime')
-    categories = Category.objects.all()
-
     context = {
         'page_title': 'главная',
         'posts': posts,
-        'categories': categories,
     }
     return render(request, 'mainapp/index.html', context)
 
 
-def post(request, slug):
-    posts = Post.objects.filter(slug=slug)
+def post(request, pk):
+    posts = Post.objects.filter(pk=pk)
     context = {
         'page_title': 'хабр',
         'posts': posts
@@ -30,17 +27,30 @@ def help(request):
     return render(request, 'mainapp/help.html', context)
 
 
-def category_page(request, slug):
-
-    categories = Category.objects.all()
-    if slug == '':
-        category = {'slug': '', 'name': 'все'}
-    else:
-        category = get_object_or_404(Category, slug=slug)
-
+def design(request):
     context = {
-        'page_title': 'главная',
-        'categories': categories,
-        'category': category,
+        'page_title': 'дизайн',
     }
-    return render(request, 'mainapp/category_page.html', context)
+    return render(request, 'mainapp/design.html', context)
+
+
+def web_development(request):
+    context = {
+        'page_title': 'веб-разработка',
+    }
+    return render(request, 'mainapp/web-development.html', context)
+
+
+def mobile_development(request):
+    context = {
+        'page_title': 'мобильная-разработка',
+    }
+    return render(request, 'mainapp/mobile-development.html', context)
+
+
+def marketing(request):
+    context = {
+        'page_title': 'маркетинг',
+    }
+    return render(request, 'mainapp/marketing.html', context)
+
