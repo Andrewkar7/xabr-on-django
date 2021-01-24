@@ -14,8 +14,8 @@ def index(request):
     return render(request, 'mainapp/index.html', context)
 
 
-def post(request, pk):
-    posts = Post.objects.filter(pk=pk)
+def post(request, slug):
+    posts = Post.objects.filter(slug=slug)
     context = {
         'page_title': 'хабр',
         'posts': posts
@@ -30,14 +30,13 @@ def help(request):
     return render(request, 'mainapp/help.html', context)
 
 
-
-def category_page(request, pk):
+def category_page(request, slug):
 
     categories = Category.objects.all()
-    if pk == '0':
-        category = {'pk': 0, 'name': 'все'}
+    if slug == '':
+        category = {'slug': '', 'name': 'все'}
     else:
-        category = get_object_or_404(Category, pk=pk)
+        category = get_object_or_404(Category, slug=slug)
 
     context = {
         'page_title': 'главная',
