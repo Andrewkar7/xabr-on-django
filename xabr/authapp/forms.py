@@ -4,7 +4,6 @@ import django.forms as forms
 from authapp.models import User
 
 
-
 class UserLoginForm(AuthenticationForm):
     class Meta:
         model = User
