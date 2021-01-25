@@ -1,3 +1,4 @@
+from django.contrib import admin
 from django.urls import path
 import authapp.views as authapp
 
@@ -5,7 +6,7 @@ import authapp.views as authapp
 app_name = 'authapp'
 
 urlpatterns = [
-    #path('', authapp.index, name='index'),
+    path('login/', authapp.login, name='login'),
 
 ]
 
