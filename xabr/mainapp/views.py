@@ -20,7 +20,7 @@ def post(request, pk):
     context = {
         'page_title': 'хабр',
         'posts': posts,
-        'categories': categories
+        'categories': categories,
     }
     return render(request, 'mainapp/post.html', context)
 
@@ -29,7 +29,7 @@ def help(request):
     categories = Category.objects.all()
     context = {
         'page_title': 'помощь',
-        'categories': categories
+        'categories': categories,
     }
     return render(request, 'mainapp/help.html', context)
 
