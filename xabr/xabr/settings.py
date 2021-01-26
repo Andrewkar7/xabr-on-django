@@ -123,4 +123,4 @@ STATICFILES_DIRS = (
     'static',
 )
 
-
+AUTH_USER_MODEL = 'authapp.XabrUser'
