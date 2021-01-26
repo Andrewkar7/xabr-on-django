@@ -124,3 +124,5 @@ STATICFILES_DIRS = (
 )
 
 AUTH_USER_MODEL = 'authapp.XabrUser'
+
+JSON_PATH = 'mainapp/json'
