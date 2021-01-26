@@ -2,6 +2,7 @@ from django.db import models
 
 
 # python manage.py migrate
+# python manage.py migrate --run-syncdb
 # python manage.py makemigrations
 # python manage.py migrate
 # Создать суперпользователя через консоль: python manage.py createsuperuser / django / geekbrains
