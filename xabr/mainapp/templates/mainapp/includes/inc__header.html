@@ -16,6 +16,20 @@
                     <path d="M21 21l-5.2-5.2"></path>
                 </svg>
             </a>
+            {% if user.is_authenticated %}
+                <div class="user-btn">
+                    <a class=" btn btn-outline-dark dropdown-toggle" href="{% url 'auth:edit' %}" data-toggle="dropdown"
+                       aria-expanded="false">
+                        {{ user.first_name|default:'пользователь'|title }}
+                        <span class="caret"></span>
+                    </a>
+{#                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">#}
+{#                        <a class="dropdown-item" href="{% url 'auth:edit' %}">#}
+{#                            профиль#}
+{#                        </a>#}
+{#                    </div>#}
+                </div>
+            {% endif %}
             {% if user.is_superuser %}
                 <a class="admin btn btn-outline-secondary" href="{% url 'admin:index' %}">
                     Админка
