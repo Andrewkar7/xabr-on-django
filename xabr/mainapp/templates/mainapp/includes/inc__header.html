@@ -28,6 +28,9 @@
                 <a class="login_status btn btn-outline-secondary" href="{% url 'auth:logout' %}">
                     Выход
                 </a>
+                <a class="login_status btn btn-outline-secondary" href="{% url 'blog:post_new' %}">
+                    Написать пост
+                </a>
             {% else %}
                 <a class="login_status btn btn-outline-secondary" href="{% url 'auth:login' %}">
                     Вход
