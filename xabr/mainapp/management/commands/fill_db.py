@@ -43,4 +43,4 @@ class Command(BaseCommand):
         #if ShopUser.objects.filter(username='django').count() == 0:  # считает количество пользователей
         #if not User.objects.filter(username='django').exists():
             #создаю суперпользователя
-            #User.objects.create_superuser(username='django', email='admin@xabr.local', password='geekbrains')
+        XabrUser.objects.create_superuser(username='django', email='admin@xabr.local', password='geekbrains')
