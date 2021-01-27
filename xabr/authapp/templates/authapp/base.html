@@ -4,17 +4,21 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="generator" content="Jekyll v4.1.1">
+
     <title>
         {% block title %}
             {{ title|title }}
         {% endblock %}
     </title>
-    <link href="{% static 'css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
-    <meta name="theme-color" content="#563d7c">
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/signin.css' %}">
+    {% block css %}
+    {% endblock %}
+    {% block js %}
+        <script src="{% static 'js/form-validation.js' %}"></script>
+    {% endblock %}
 </head>
-<body class="text-center">
+<body class="text-center bg-light">
 <div class="container">
     {% block container %}
     {% endblock %}

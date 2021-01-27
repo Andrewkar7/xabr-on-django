@@ -23,7 +23,7 @@ class XabrUserLoginForm(AuthenticationForm):
 class XabrUserRegisterForm(UserCreationForm):
     class Meta:
         model = XabrUser
-        fields = ('username', 'first_name', 'password1', 'password2', 'aboutMe', 'age', 'avatar')
+        fields = ('username', 'first_name', 'email', 'password1', 'password2', 'age', 'avatar')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
