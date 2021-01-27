@@ -12,6 +12,12 @@ class XabrUserLoginForm(AuthenticationForm):
         super().__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = f'form-control {field_name}'
+            if field_name == 'password':
+                field.widget.attrs['placeholder'] = f'Пароль'
+            else:
+                field.widget.attrs['placeholder'] = f'Имя пользователя'
+
+
 
 
 class XabrUserRegisterForm(UserCreationForm):
