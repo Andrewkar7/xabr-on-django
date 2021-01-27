@@ -1,4 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 from authapp.forms import XabrUserLoginForm
 from django.contrib import auth
 from django.urls import reverse
@@ -22,10 +23,6 @@ def login(request):
     return render(request, 'authapp/login.html', content)
 
 
-
-
-
-
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('main:index'))
@@ -47,7 +44,7 @@ def register(request):
 
     return render(request, 'authapp/register.html', content)
 
-
+@login_required
 def edit(request):
     title = 'редактирование'
 

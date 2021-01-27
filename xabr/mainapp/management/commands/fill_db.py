@@ -41,6 +41,6 @@ class Command(BaseCommand):
 
         #if not len(ShopUser.objects.filter(username='django'))    # len лучше не использовать
         #if ShopUser.objects.filter(username='django').count() == 0:  # считает количество пользователей
-        #if not User.objects.filter(username='django').exists():
+        if not XabrUser.objects.filter(username='django').exists():
             #создаю суперпользователя
-        XabrUser.objects.create_superuser(username='django', email='admin@xabr.local', password='geekbrains')
+            XabrUser.objects.create_superuser(username='django', email='admin@xabr.local', password='geekbrains')
