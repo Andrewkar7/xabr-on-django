@@ -22,6 +22,10 @@ def login(request):
     return render(request, 'authapp/login.html', content)
 
 
+
+
+
+
 def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('main:index'))
