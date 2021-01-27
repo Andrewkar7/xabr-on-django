@@ -1,5 +1,6 @@
 {% extends 'authapp/base.html' %}
 {% load static %}
+{% load my_tags %}
 {% block css %}
     <link href="{% static 'css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/registration.css' %}">
@@ -11,15 +12,22 @@
         <a class="h1 mb-3 font-weight-bold text-dark" href="{% url 'main:index' %}">Xabr</a>
         <h2>Редактрирование профиля</h2>
     </div>
-    <form class="form-horizontal" action="{% url 'auth:edit' %}" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ edit_form.as_p }}
-        <input class="form-control" type="submit" value="сохранить">
-    </form>
-    <button class="btn btn-round form-control last">
-        <a href="{% url 'main:index' %}" class="">
-            на главную
-        </a>
-    </button>
-    <div class="user_avatar"><img src="/media/{{ user.avatar }}"></div>
+    <div class="media">
+        <img class="mr-3 " src="{{ user.avatar|media_folder_users }}" alt="">
+        <div class="media-body">
+            <form class="form-horizontal" action="{% url 'auth:edit' %}" method="post" enctype="multipart/form-data">
+
+                {% csrf_token %}
+                {{ edit_form.as_p }}
+                <input class="form-control" type="submit" value="сохранить">
+            </form>
+            <button class="btn btn-round form-control last">
+                <a href="{% url 'main:index' %}" class="">
+                    на главную
+                </a>
+            </button>
+        </div>
+    </div>
+
+
 {% endblock %}
