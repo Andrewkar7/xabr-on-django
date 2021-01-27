@@ -10,11 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
-from pathlib import Path
+#from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+#BASE_DIR = Path(__file__).resolve(strict=True).parent.parent
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -25,7 +27,7 @@ SECRET_KEY = '5-wfh6#m^(irjt92ki2)+r#@ii2bzo=-4-urd9x=ck9a)#09qt'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['DmitryGrodzinsky.pythonanywhere.com']
 
 
 # Application definition
@@ -38,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mainapp',
-    'authapp',
 ]
 
 MIDDLEWARE = [
@@ -76,9 +77,24 @@ WSGI_APPLICATION = 'xabr.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
+    #'default': {
+    #    'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    #}
+    #'default': {
+    #    'ENGINE': 'django.db.backends.mysql',
+    #    'NAME': 'DmitryGrodzinsky$xabr',
+    #    'USER': 'DmitryGrodzinsky',
+    #    'PASSWORD': 'geekbrains',
+    #    'HOST': 'DmitryGrodzinsky.mysql.pythonanywhere-services.com',
+    #}
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'xabr',
+        'USER': 'super',
+        'PASSWORD': 'geekbrains',
+        'HOST': 'DmitryGrodzinsky-2049.postgres.pythonanywhere-services.com',
+        'PORT': '12049'
     }
 }
 
@@ -115,14 +131,14 @@ USE_L10N = True
 
 USE_TZ = True
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = (
-    'static',
-)
+STATIC_URL = "/static/"
 
-AUTH_USER_MODEL = 'authapp.XabrUser'
+STATIC_ROOT = os.path.join(BASE_DIR, "../static")
 
-JSON_PATH = 'mainapp/json'
+#STATICFILES_DIRS = (
+#        os.path.join(BASE_DIR, 'static'),
+#)
