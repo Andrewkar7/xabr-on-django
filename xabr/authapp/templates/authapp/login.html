@@ -20,11 +20,10 @@
         {% endif %}
         {{ form.as_p }}
         <br>
-        <input class="form-control" type="submit" value="войти">
-        {#        <label>#}
-        {#            <input type="checkbox" value="remember-me"> Запомнить меня#}
-        {#        </label>#}
-        {#        <input class="form-control btn btn-lg btn-primary btn-block" type="submit" value="Войти">#}
+        <label>
+            <input type="checkbox" value="remember-me"> Запомнить меня
+        </label>
+        <input class="form-control btn btn-lg btn-primary btn-block" type="submit" value="Войти">
         <a href="{% url 'auth:register' %}"
            class="btn  btn-lg btn-primary btn-block">
             Зарегистрироваться
