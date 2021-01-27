@@ -1,9 +1,12 @@
-
 {% extends 'authapp/base.html' %}
 {% load static %}
+{% block css %}
+    <link href="{% static 'css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}">
+    {#            <link rel="stylesheet" href="{% static 'css/style.css' %}">#}
+{% endblock %}
 
-
-{% block content %}
+{% block container %}
     <form class="form-horizontal" action="{% url 'auth:edit' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ edit_form.as_p }}
