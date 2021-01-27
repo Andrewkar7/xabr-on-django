@@ -1,0 +1,11 @@
+{% extends 'blogapp/base.html' %}
+ 
+{% block content %}
+  <div class="post-entry">
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.body }}</p>
+  </div>
+ 
+  <p><a href="{% url 'blogapp:post_edit' post.pk %}">Редактировать пост в блоге</a></p>
+  <p><a href="{% url 'blogapp:post_delete' post.pk %}">Удалить пост в блоге</a></p>
+{% endblock content %}
