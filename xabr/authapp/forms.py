@@ -18,8 +18,6 @@ class XabrUserLoginForm(AuthenticationForm):
                 field.widget.attrs['placeholder'] = f'Имя пользователя'
 
 
-
-
 class XabrUserRegisterForm(UserCreationForm):
     class Meta:
         model = XabrUser
