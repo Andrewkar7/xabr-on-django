@@ -126,6 +126,8 @@ STATICFILES_DIRS = (
 
 AUTH_USER_MODEL = 'authapp.XabrUser'
 
+LOGIN_URL = '/auth/login/'
+
 JSON_PATH = 'mainapp/json'
 
 MEDIA_URL = '/media/'
