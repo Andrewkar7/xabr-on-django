@@ -11,7 +11,7 @@ from django.urls import reverse
 
 class Category(models.Model):
     name = models.CharField(verbose_name='название категории', max_length=64, default='', unique=True)
-    slug = models.SlugField(verbose_name='URL', max_length=70, default='')
+    slug = models.SlugField(verbose_name='URL', max_length=70)
     description = models.TextField(verbose_name='описание категории', blank=True)
 
     def __str__(self):
@@ -21,7 +21,7 @@ class Category(models.Model):
 class Post(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     name = models.CharField(verbose_name='название статьи', max_length=128)
-    slug = models.SlugField(verbose_name='URL', max_length=70, default='')
+    slug = models.SlugField(verbose_name='URL', max_length=70)
     description = models.TextField(verbose_name='краткое описание статьи', blank=True)
     posts_text = models.TextField(verbose_name='текст статьи', blank=True)
     create_datetime = models.DateTimeField(verbose_name='дата создания', auto_now_add=True, blank=True)

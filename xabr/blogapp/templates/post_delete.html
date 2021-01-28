@@ -1,9 +1,9 @@
-{% extends 'blogapp/base.html' %}
+{% extends 'mainapp/base.html' %}
  
-{% block content %}
+{% block main %}
     <h1>Удалить пост</h1>
     <form action="" method="post">{% csrf_token %}
-      <p>Вы уверены, что хотите удалить "{{ post.title }}"?</p>
-      <input type="submit" value="Подтвердить" />
+      <p>Вы уверены, что хотите удалить "{{ post.name }}"?</p>
+      <input class="btn btn-outline-secondary" type="submit" value="Подтвердить" />
     </form>
-{% endblock content %}
+{% endblock %}
