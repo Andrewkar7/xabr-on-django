@@ -15,6 +15,7 @@
             <nav class="blog-pagination">
                 <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Комментировать</a>
             </nav>
+                <input type="" name="{{ item.pk }}" min="0" max="{{ item.product.quantity }}" value="{{ item.quantity }}">
                 {% endfor %}
             </div><!-- /.blogapp-post -->
         </div><!-- /.blogapp-main -->

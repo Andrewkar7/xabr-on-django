@@ -25,6 +25,8 @@ class Post(models.Model):
     description = models.TextField(verbose_name='краткое описание статьи', blank=True)
     posts_text = models.TextField(verbose_name='текст статьи', blank=True)
     create_datetime = models.DateTimeField(verbose_name='дата создания', auto_now_add=True, blank=True)
+    like_quantity = models.PositiveIntegerField('кол-во', default=0)
+    is_active = models.BooleanField(verbose_name='активна', default=True)
 
     # при makemigrations необходимо указывать в [default: timezone.now] >>> timezone.now
 

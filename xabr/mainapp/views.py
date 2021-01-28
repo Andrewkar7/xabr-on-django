@@ -1,5 +1,9 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
+
 from .models import Category, Post
+from xabr.settings import LOGIN_URL
 
 
 def index(request):
@@ -50,3 +54,19 @@ def category_page(request, slug):
         'posts': posts,
     }
     return render(request, 'mainapp/category_page.html', context)
+
+
+def change_like(request, slug):
+    post = get_object_or_404(Post, slug=slug)
+    #if request.method == 'POST':
+        #post.is_active = not post.is_active             # попыпка прописать выключатель активности лайка,пока не получилоась
+        #post.like_quantity += 1
+        #post.save()
+        #return HttpResponseRedirect(reverse('mainapp/post.html'))
+    post.like_quantity += 1
+    post.save()
+
+    if LOGIN_URL in request.META.get('HTTP_REFERER'):
+        return HttpResponseRedirect(reverse('mainapp/post.html', kwargs={'slug': slug}))
+    else:
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
