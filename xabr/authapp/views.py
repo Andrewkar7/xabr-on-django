@@ -33,20 +33,24 @@ def logout(request):
 
 
 def register(request):
-    title = 'регистрация'
-
     if request.method == 'POST':
         register_form = XabrUserRegisterForm(request.POST, request.FILES)
-
         if register_form.is_valid():
-            register_form.save()
-            return HttpResponseRedirect(reverse('auth:login'))
+            user = register_form.save()
+            if user.send_verify_mail():
+                print('сообщение подтверждения отправлено')
+                return HttpResponseRedirect(reverse('auth:send_confirm'))
+            else:
+                print('ошибка отправки сообщения')
+            # return HttpResponseRedirect(reverse('auth:login'))
+            return HttpResponseRedirect(reverse('mainapp:index'))
     else:
         register_form = XabrUserRegisterForm()
-
-    content = {'title': title, 'register_form': register_form}
-
-    return render(request, 'authapp/register.html', content)
+    context = {
+        'title': 'регистрация пользователя',
+        'register_form': register_form,
+    }
+    return render(request, 'authapp/register.html', context)
 
 
 @login_required
@@ -69,14 +73,17 @@ def edit(request):
     return render(request, 'authapp/edit.html', content)
 
 
-@login_required
-def read(request):
-    user = XabrUser.objects.all()
-    title = 'профиль пользователя'
-
-    content = {
-        'title': title,
-        'user': user,
-    }
-
-    return render(request, 'authapp/read.html', content)
+def verify(request, email, activation_key):
+    try:
+        user = XabrUser.objects.get(email=email)
+        if user.activation_key == activation_key and not user.is_activation_key_expired():
+            user.is_active = True
+            user.save()
+            auth.login(request, user,
+                       backend='django.contrib.auth.backends.ModelBackend')
+        else:
+            print(f'error activation user: {user}')
+        return render(request, 'authapp/verification.html')
+    except Exception as e:
+        print(f'error activation user : {e.args}')
+        return HttpResponseRedirect(reverse('main:home'))
