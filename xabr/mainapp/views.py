@@ -1,9 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
 from .models import Category, Post
 from xabr.settings import LOGIN_URL
+
 
 
 def index(request):
@@ -16,6 +18,7 @@ def index(request):
         'categories': categories,
     }
     return render(request, 'mainapp/index.html', context)
+
 
 
 def post(request, slug):
