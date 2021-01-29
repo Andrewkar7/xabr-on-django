@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 
+from .forms import CommentForm
 from .models import Category, Post
 from xabr.settings import LOGIN_URL
 
@@ -73,3 +74,28 @@ def change_like(request, slug):
         return HttpResponseRedirect(reverse('mainapp/post.html', kwargs={'slug': slug}))
     else:
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def post_detail(request, year, month, day, post):
+    post = get_object_or_404(Post, slug=post,
+                             status='published',
+                             create_datetime=year,
+                             publish__month=month,
+                             publish__day=day)
+
+    comments = post.comments.filter(active=True)
+
+    if request.method == 'POST':
+
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.post = post
+            new_comment.save()
+    else:
+        comment_form = CommentForm()
+    return render(request,
+                  'mainapp/post.html',
+                  {'post': post,
+                   'comments': comments,
+                   'comment_form': comment_form})
