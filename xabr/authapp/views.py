@@ -4,6 +4,7 @@ from authapp.forms import XabrUserLoginForm
 from django.contrib import auth
 from django.urls import reverse
 from authapp.forms import XabrUserRegisterForm, XabrUserEditForm
+from authapp.models import XabrUser
 
 
 def login(request):
@@ -22,8 +23,7 @@ def login(request):
             else:
                 return HttpResponseRedirect(reverse('main:index'))
 
-
-    content = {'title': title, 'form': login_form, 'next': next,}
+    content = {'title': title, 'form': login_form, 'next': next, }
     return render(request, 'authapp/login.html', content)
 
 
@@ -48,6 +48,7 @@ def register(request):
 
     return render(request, 'authapp/register.html', content)
 
+
 @login_required
 def edit(request):
     title = 'редактирование'
@@ -66,3 +67,16 @@ def edit(request):
     }
 
     return render(request, 'authapp/edit.html', content)
+
+
+@login_required
+def read(request):
+    user = XabrUser.objects.all()
+    title = 'профиль пользователя'
+
+    content = {
+        'title': title,
+        'user': user,
+    }
+
+    return render(request, 'authapp/read.html', content)

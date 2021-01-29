@@ -2,6 +2,9 @@
     max-width: 600px;
 }
 
+img {
+    width: 160px;
+}
 .lh-condensed {
     line-height: 1.25;
 }

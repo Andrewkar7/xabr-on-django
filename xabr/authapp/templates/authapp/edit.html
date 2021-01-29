@@ -19,14 +19,23 @@
 
                 {% csrf_token %}
                 {{ edit_form.as_p }}
-                <input class="form-control" type="submit" value="сохранить">
+                <input class="btn btn-lg btn-primary btn-block form-control" type="submit" value="Сохранить">
             </form>
-            <button class="btn btn-round form-control last">
-                <a href="{% url 'main:index' %}" class="">
-                    на главную
-                </a>
-            </button>
+            <br>
+            <a class="btn btn-lg btn-primary form-control" href="{% url 'main:index' %}" class="">
+                На главную
+            </a>
+
+
         </div>
+    </div>
+    <div>
+        <footer class="my-4 pt-5 text-muted text-center text-small">
+            <p class="mb-1">&copy; 2020-{% now 'Y' %} Команда №1</p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Support</a></li>
+            </ul>
+        </footer>
     </div>
 
 
