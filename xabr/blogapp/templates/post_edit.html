@@ -1,9 +1,9 @@
-{% extends 'blogapp/base.html' %}
+{% extends 'mainapp/base.html' %}
  
-{% block content %}
+{% block main %}
     <h1>Редактировать пост</h1>
     <form action="" method="post">{% csrf_token %}
       {{ form.as_p }}
-    <input type="submit" value="Обновить" />
+    <input class="btn btn-outline-primary" type="submit" value="Обновить" />
 </form>
-{% endblock content %}
+{% endblock %}

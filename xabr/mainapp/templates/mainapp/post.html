@@ -1,10 +1,5 @@
 {% extends 'mainapp/base.html' %}
 {% load static %}
-
-{% block container %}
-    {% include 'mainapp/includes/inc__header.html' %}
-    {% include 'mainapp/includes/inc__main_menu.html' %}
-{% endblock %}
 {% block main %}
     <div class="row">
         <div class="col-md-12 blog-main">
@@ -18,8 +13,19 @@
                 <hr>
                 <p>{{post.posts_text}}</p>
             <nav class="blog-pagination">
-                <a class="btn btn-outline-secondary disabled" href="#" tabindex="-1" aria-disabled="true">Комментировать</a>
+                {% if user.is_authenticated %}
+                    <a class="btn btn-outline-primary" href="#" tabindex="-1" aria-disabled="true">Комментировать</a>
+                    {% if post.is_active%}
+                        <a class="btn btn-outline-primary" href="{% url 'main:change_like' post.slug %}"><i class="fa fa-heart-o" aria-hidden="true" ></i>{{post.like_quantity}}</a>
+                    {% else %}
+                        <a class="btn btn-outline-secondary disabled" tabindex="-1" aria-disabled="true" href="#"><i class="fa fa-heart" aria-hidden="true" ></i>{{post.like_quantity}}</a>
+                    {% endif %}
+                {% else%}
+                        <a class="btn btn-outline-primary" href="{% url 'auth:login' %}" tabindex="-1" aria-disabled="true">Комментировать</a>
+                        <a class="btn btn-outline-primary" href="{% url 'auth:login' %}"><i class="fa fa-heart" aria-hidden="true" ></i>{{post.like_quantity}}</a>
+                {% endif %}
             </nav>
+                <input type="" name="{{ item.pk }}" min="0" max="{{ item.product.quantity }}" value="{{ item.quantity }}">
                 {% endfor %}
             </div><!-- /.blogapp-post -->
         </div><!-- /.blogapp-main -->
