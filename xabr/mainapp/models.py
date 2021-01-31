@@ -1,6 +1,6 @@
 from django.db import models
 from django.urls import reverse
-
+from authapp.models import XabrUser
 
 # python manage.py migrate
 # python manage.py migrate --run-syncdb
@@ -9,7 +9,9 @@ from django.urls import reverse
 # Создать суперпользователя через консоль: python manage.py createsuperuser / django / geekbrains
 
 
+
 class Category(models.Model):
+    '''класс категории поста'''
     name = models.CharField(verbose_name='название категории', max_length=64, default='', unique=True)
     slug = models.SlugField(verbose_name='URL', max_length=70)
     description = models.TextField(verbose_name='описание категории', blank=True)
@@ -19,6 +21,7 @@ class Category(models.Model):
 
 
 class Post(models.Model):
+    '''класс поста'''
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     name = models.CharField(verbose_name='название статьи', max_length=128)
     slug = models.SlugField(verbose_name='URL', max_length=70)
@@ -27,6 +30,7 @@ class Post(models.Model):
     create_datetime = models.DateTimeField(verbose_name='дата создания', auto_now_add=True, blank=True)
     like_quantity = models.PositiveIntegerField('кол-во', default=0)
     is_active = models.BooleanField(verbose_name='активна', default=True)
+    comment = models.TextField(verbose_name='комментарии', blank=True)
 
     # при makemigrations необходимо указывать в [default: timezone.now] >>> timezone.now
 
@@ -37,17 +41,21 @@ class Post(models.Model):
         return reverse('blogapp:post_detail', args=[str(self.id)])
 
 
-class Comment(models.Model):
-    post = models.ForeignKey(Post, related_name='comments', on_delete=models.CASCADE)
-    name = models.CharField(max_length=80)
+
+
+class Comments(models.Model):
+    '''класс комментариев к постам'''
+    user = models.ForeignKey(XabrUser, verbose_name="пользователь", on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, verbose_name="пост", on_delete=models.CASCADE)
+    slug = models.SlugField(verbose_name='URL', max_length=70, default='')
+    text = models.TextField("комментировать")
+    created = models.DateTimeField("дата добавления", auto_now_add=True, null=True)
+    moderation = models.BooleanField("модерация", default=False)
     email = models.EmailField()
-    body = models.TextField()
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-    active = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ('created',)
+        verbose_name = "комментарий"
+        verbose_name_plural = "комментарии"
 
     def __str__(self):
-        return 'Comment by {} on {}'.format(self.name, self.post)
+        return "{}".format(self.user)
