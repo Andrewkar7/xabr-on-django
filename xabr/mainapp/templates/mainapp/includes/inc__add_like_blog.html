@@ -1,0 +1,28 @@
+{% load static %}
+
+{% load likes_blog%}
+
+{% is_liked blog_post_id as liked_bool %}
+{% count_likes_id blog_post_id as blog_likes_id %}
+
+{% if is_liked_bool %}
+    {% blog_likes_id blog_post_id as blog_likes_id %}
+{% endif %}
+
+<form action="{% if not is_liked_bool%}{% url 'likes:add'%}{% else %} {% url 'likes:remove' %}{% endif %}">
+    <input type="hidden" name="blog_post_id" value="{{blog_post_id}}">
+    <input type="hidden" name="user_id" value="{{if user.is authenticated}} {{request.user.id}} {% else %}None {% endif%}">
+    <input type="hidden" name="url_form" value="{{request.path}}">
+
+    {% if is_liked_bool%}
+    <input type="hidden" name="blog_likes_id" value="{{blog_likes_id}}">
+    {% endif %}
+    <button>
+        {% if not_is_liked_bool%}
+        <a class="btn btn-outline-primary" href="{% url 'main:change_like' post.slug %}"><i class="fa fa-heart-o" aria-hidden="true" ></i>{{post.like_quantity}}</a>
+        {% else %}
+        <a class="btn btn-outline-secondary disabled" tabindex="-1" aria-disabled="true" href="#"><i class="fa fa-heart" aria-hidden="true" ></i>{{post.like_quantity}}</a>
+        <span class="likes-qty">{{ likes_counter}}</span>
+        {% endif %}
+    </button>
+</form>

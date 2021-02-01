@@ -2,11 +2,13 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
+from django.views.generic.base import View
 
 from .forms import CommentForm
-from .models import Category, Post, Comments
+from .models import Category, Post, Comments, BlogLikes
 from xabr.settings import LOGIN_URL
 
+from authapp.models import XabrUser
 
 
 def index(request):
@@ -74,6 +76,21 @@ def category_page(request, slug):
     }
     return render(request, 'mainapp/category_page.html', context)
 
+def all_user_posts(request):
+    categories = Category.objects.all()
+
+
+    posts = Post.objects.filter(user=request.user).order_by('-create_datetime')
+
+
+    context = {
+        'page_title': 'главная',
+        'posts': posts,
+        'categories': categories,
+
+    }
+    return render(request, 'mainapp/all_user_posts.html', context)
+
 
 def change_like(request, slug):
     post = get_object_or_404(Post, slug=slug)
@@ -89,5 +106,37 @@ def change_like(request, slug):
         return HttpResponseRedirect(reverse('mainapp/post.html', kwargs={'slug': slug}))
     else:
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+
+
+#class AddLikeView(View):
+    #def post(self, request, *args, **kwargs):
+        #blog_post_id = int(request.POST.get('blog_post_id'))
+        #user_id = int(request.POST.get('user_id'))
+        #url_form = request.POST.get('url_form')
+
+        #user_inst = XabrUser.objects.get(id=user_id)
+        #blog_post_inst = Post.objects.get(id=blog_post_id)
+
+        #try:
+            #blog_like_inst = Post.objects.get(blog_post=blog_post_inst, liked_by=user_inst)
+        #except Exception as e:
+            #blog_like = BlogLikes.objects(blog_post_inst, liked_by=user_inst, like=True)
+            #blog_like.save
+
+        #return redirect(url_form)
+
+
+#class RemoveLikeView(View):
+    #def post(self, request, *args, **kwargs):
+        #blog_likes_id = int(request.POST.get('blog_likes_id'))
+        #url_form = request.POST.get('url_form')
+
+
+        #blog_like = BlogLikes.objects(id=blog_likes_id)
+        #blog_like.delete()
+
+        #return redirect(url_form)
 
 

@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import RESTRICT
 from django.urls import reverse
 from authapp.models import XabrUser
 
@@ -7,7 +8,9 @@ from authapp.models import XabrUser
 # python manage.py makemigrations
 # python manage.py migrate
 # Создать суперпользователя через консоль: python manage.py createsuperuser / django / geekbrains
+from django.utils import timezone
 
+from xabr import settings
 
 
 class Category(models.Model):
@@ -22,6 +25,7 @@ class Category(models.Model):
 
 class Post(models.Model):
     '''класс поста'''
+    user = models.ForeignKey(XabrUser, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     name = models.CharField(verbose_name='название статьи', max_length=128)
     slug = models.SlugField(verbose_name='URL', max_length=70)
@@ -59,3 +63,18 @@ class Comments(models.Model):
 
     def __str__(self):
         return "{}".format(self.user)
+
+
+class BlogLikes(models.Model):
+    blog_post = models.ForeignKey(Post, on_delete=models.SET_NULL, null=True, verbose_name="публикация")
+    liked_by = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL, null=True, verbose_name="лайк")
+    like = models.BooleanField('Like', default=False)
+    created = models.DateTimeField("дата добавления", default=timezone.now)
+
+
+    class Meta:
+        verbose_name = "Blog Like"
+        verbose_name_plural = "Blog Likes"
+
+    def __str__(self):
+        return f'{self.liked_by}: {self.blog_post} {self.like}'
