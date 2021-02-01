@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.views.generic.base import View
 
 from .forms import CommentForm
-from .models import Category, Post, Comments, BlogLikes
+from .models import Category, Post, Comments
 from xabr.settings import LOGIN_URL
 
 from authapp.models import XabrUser

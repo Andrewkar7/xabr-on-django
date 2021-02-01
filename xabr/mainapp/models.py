@@ -1,3 +1,5 @@
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models import RESTRICT
 from django.urls import reverse
@@ -65,16 +67,23 @@ class Comments(models.Model):
         return "{}".format(self.user)
 
 
-class BlogLikes(models.Model):
-    blog_post = models.ForeignKey(Post, on_delete=models.SET_NULL, null=True, verbose_name="публикация")
-    liked_by = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL, null=True, verbose_name="лайк")
-    like = models.BooleanField('Like', default=False)
-    created = models.DateTimeField("дата добавления", default=timezone.now)
+
+class Like(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             related_name='likes',
+                             on_delete=models.CASCADE)
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
+    object_id = models.PositiveIntegerField()
+    content_object = GenericForeignKey('content_type', 'object_id')
 
 
-    class Meta:
-        verbose_name = "Blog Like"
-        verbose_name_plural = "Blog Likes"
+class Tweet(models.Model):
+    body = models.CharField(max_length=140)
+    likes = GenericRelation(Like)
 
     def __str__(self):
-        return f'{self.liked_by}: {self.blog_post} {self.like}'
+        return self.body
+
+    @property
+    def total_likes(self):
+        return self.likes.count()
