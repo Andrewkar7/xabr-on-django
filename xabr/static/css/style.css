@@ -1,5 +1,8 @@
 /* stylelint-disable selector-list-comma-newline-after */
-
+.form_comment{
+    width: 100px;
+    height: 20px;
+}
 .blog-header {
     line-height: 1;
     border-bottom: 1px solid #e5e5e5;

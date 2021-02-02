@@ -23,6 +23,11 @@ class Command(BaseCommand):
         Category.objects.all().delete()
         [Category.objects.create(**category) for category in categories]
 
+
+        if not XabrUser.objects.filter(username='django').exists():
+            #создаю суперпользователя
+            XabrUser.objects.create_superuser(username='django', email='admin@xabr.local', password='geekbrains')
+
         posts = load_from_json('posts')
         Post.objects.all().delete()  # all() -> QuerySet -> .first() -> concrete object
         for post in posts:
@@ -39,8 +44,3 @@ class Command(BaseCommand):
             new_post.save()
 
 
-        #if not len(ShopUser.objects.filter(username='django'))    # len лучше не использовать
-        #if ShopUser.objects.filter(username='django').count() == 0:  # считает количество пользователей
-        if not XabrUser.objects.filter(username='django').exists():
-            #создаю суперпользователя
-            XabrUser.objects.create_superuser(username='django', email='admin@xabr.local', password='geekbrains')
