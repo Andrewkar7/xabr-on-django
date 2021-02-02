@@ -53,6 +53,15 @@ def register(request):
     return render(request, 'authapp/register.html', context)
 
 
+def read_profile(request):
+    user = request.user
+    content = {
+        'title': 'Профиль пользователя',
+        'user': user
+    }
+    return render(request, 'authapp/read_profile.html', content)
+
+
 @login_required
 def edit(request):
     title = 'редактирование'

@@ -27,7 +27,7 @@
             {% endif %}
             {% if user.is_authenticated %}
                 <a class="btn btn-sm btn-outline-secondary"
-                   href="{% url 'auth:edit' %}">{{ user.first_name|default:'пользователь'|title }}</a>
+                   href="{% url 'auth:read_profile' %}">{{ user.first_name|default:'пользователь'|title }}</a>
                 <a class="btn btn-sm btn-outline-secondary"
                    href="{% url 'main:all_user_posts' %}">Посты {{ user.first_name|default:'пользователь'|title }}</a>
                 <a class="btn btn-sm btn-outline-secondary" href="{% url 'blog:post_new' %}">Написать пост</a>

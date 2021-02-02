@@ -1,0 +1,45 @@
+{% extends 'authapp/base.html' %}
+{% load static %}
+{% block css %}
+    <link href="{% static 'css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}">
+    {#            <link rel="stylesheet" href="{% static 'css/style.css' %}">#}
+{% endblock %}
+{% block container %}
+    <div class="py-5 text-center">
+        <a class="h1 mb-3 font-weight-bold text-dark" href="{% url 'main:index' %}">Xabr</a>
+        <h2>Профиль</h2>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="user_name">
+                <p><strong>{{ user.username }}</strong></p>
+                <p>
+                    {% if user.first_name %}
+                        <b>{{ user.first_name|title }}</b>
+                        {% if user.last_name %}
+                            <p>{{ user.last_name|title }}</p>
+                        {% endif %}
+                    {% endif %}
+                </p>
+            </div>
+            <div class="user_age">
+                age:<br>
+                {{ user.age }} лет
+            </div>
+            <div class="user_email">
+                email:<br>
+                {{ user.email }}
+            </div>
+        </div>
+    </div>
+    <footer class="my-4 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2020-{% now 'Y' %} Команда №1</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+    </footer>
+
+{% endblock %}
