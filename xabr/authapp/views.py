@@ -46,11 +46,11 @@ def register(request):
             return HttpResponseRedirect(reverse('mainapp:index'))
     else:
         register_form = XabrUserRegisterForm()
-    context = {
+    content = {
         'title': 'регистрация пользователя',
         'register_form': register_form,
     }
-    return render(request, 'authapp/register.html', context)
+    return render(request, 'authapp/register.html', content)
 
 
 def read_profile(request):
