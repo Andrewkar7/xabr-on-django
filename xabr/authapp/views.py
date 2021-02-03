@@ -70,7 +70,7 @@ def edit(request):
         edit_form = XabrUserEditForm(request.POST, request.FILES, instance=request.user)
         if edit_form.is_valid():
             edit_form.save()
-            return HttpResponseRedirect(reverse('main:index'))
+            return HttpResponseRedirect(reverse('auth:read_profile'))
     else:
         edit_form = XabrUserEditForm(instance=request.user)
 

@@ -46,7 +46,7 @@ class XabrUserRegisterForm(UserCreationForm):
 class XabrUserEditForm(UserChangeForm):
     class Meta:
         model = XabrUser
-        fields = ('username', 'first_name', 'aboutMe', 'age', 'avatar', 'password')
+        fields = ('username', 'first_name', 'email', 'age', 'aboutMe', 'avatar', 'password')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
