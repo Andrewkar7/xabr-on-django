@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.views.generic.base import View
 
 from .forms import CommentForm
-from .models import Category, Post, Comments
+from .models import Category, Post, Comments, Likes
 from xabr.settings import LOGIN_URL
 
 from authapp.models import XabrUser
@@ -50,6 +50,7 @@ def post(request, slug):
     return render(request, 'mainapp/post.html', context)
 
 
+
 def help(request):
     categories = Category.objects.all()
     context = {
@@ -76,9 +77,10 @@ def category_page(request, slug):
     }
     return render(request, 'mainapp/category_page.html', context)
 
+
+
 def all_user_posts(request):
     categories = Category.objects.all()
-
 
     posts = Post.objects.filter(user=request.user).order_by('-create_datetime')
 
@@ -93,14 +95,28 @@ def all_user_posts(request):
 
 
 def change_like(request, slug):
+    #post = Post.objects.filter(slug=slug, user=request.user)
+    #post = Post.objects.all()
+    #post = Post.objects.filter(slug=slug)
     post = get_object_or_404(Post, slug=slug)
     #if request.method == 'POST':
         #post.is_active = not post.is_active             # попыпка прописать выключатель активности лайка,пока не получилоась
         #post.like_quantity += 1
         #post.save()
         #return HttpResponseRedirect(reverse('mainapp/post.html'))
-    post.like_quantity += 1
-    post.save()
+    #posts = post.filter(user=request.user)
+    #like = post.like_quantity_set.filter(slug=slug, user=request.user)
+    likes = Likes.objects.filter(user=request.user)
+    #likes = get_object_or_404(Likes, user=request.user)
+    #likes = Likes.objects.all()
+    like = likes.like_quantity.filter(post=post)
+
+    if like >= 0:
+        post.like_quantity += 1
+        post.save()
+    else:
+        post.like_quantity -= 1
+        post.save()
 
     if LOGIN_URL in request.META.get('HTTP_REFERER'):
         return HttpResponseRedirect(reverse('mainapp/post.html', kwargs={'slug': slug}))

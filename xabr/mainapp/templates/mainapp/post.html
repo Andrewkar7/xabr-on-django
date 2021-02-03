@@ -39,8 +39,8 @@
                     </form>
 
                 {% else%}
-                        <a class="btn btn-outline-primary" href="{% url 'auth:login' %}" tabindex="-1" aria-disabled="true">Комментировать</a>
-                        <a class="btn btn-outline-primary" href="{% url 'auth:login' %}"><i class="fa fa-heart" aria-hidden="true" ></i>{{post.like_quantity}}</a>
+                        <a class="btn btn-outline-primary" href="{% url 'auth:login' %}?next={{request.path}}" tabindex="-1" aria-disabled="true">Комментировать</a>
+                        <a class="btn btn-outline-primary" href="{% url 'auth:login' %}?next={{request.path}}"><i class="fa fa-heart" aria-hidden="true" ></i>{{post.like_quantity}}</a>
                 {% endif %}
             </nav>
                 

@@ -47,6 +47,21 @@ class Post(models.Model):
         return reverse('blogapp:post_detail', args=[str(self.id)])
 
 
+class Likes(models.Model):
+    '''класс лайков к постам'''
+    user = models.ForeignKey(XabrUser, on_delete=models.CASCADE)
+    post = models.ForeignKey(Post, verbose_name="пост", on_delete=models.CASCADE)
+    slug = models.SlugField(verbose_name='URL', max_length=70, default='')
+    like_quantity = models.PositiveIntegerField('кол-во', default=0)
+    created = models.DateTimeField("дата добавления", auto_now_add=True, null=True)
+
+    class Meta:
+        verbose_name = "лайк"
+        verbose_name_plural = "лайки"
+
+    def __str__(self):
+        return "{}".format(self.user)
+
 
 
 class Comments(models.Model):
@@ -68,22 +83,3 @@ class Comments(models.Model):
 
 
 
-class Like(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             related_name='likes',
-                             on_delete=models.CASCADE)
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey('content_type', 'object_id')
-
-
-class Tweet(models.Model):
-    body = models.CharField(max_length=140)
-    likes = GenericRelation(Like)
-
-    def __str__(self):
-        return self.body
-
-    @property
-    def total_likes(self):
-        return self.likes.count()
