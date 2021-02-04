@@ -5,6 +5,7 @@ from django.contrib import auth
 from django.urls import reverse
 from authapp.forms import XabrUserRegisterForm, XabrUserEditForm
 from authapp.models import XabrUser
+from mainapp.models import Category, Post
 
 
 def login(request):
@@ -54,10 +55,14 @@ def register(request):
 
 
 def read_profile(request):
+    categories = Category.objects.all()
+    posts = Post.objects.filter(user=request.user).order_by('-create_datetime')
     user = request.user
     content = {
         'title': 'Профиль пользователя',
-        'user': user
+        'user': user,
+        'posts': posts,
+        'categories': categories,
     }
     return render(request, 'authapp/read_profile.html', content)
 
@@ -96,3 +101,5 @@ def verify(request, email, activation_key):
     except Exception as e:
         print(f'error activation user : {e.args}')
         return HttpResponseRedirect(reverse('main:home'))
+
+
