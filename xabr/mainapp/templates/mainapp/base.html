@@ -11,7 +11,11 @@
     </title>
     <link href="{% static 'css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/font-awesome/css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block js %}
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+    {% endblock %}
 </head>
 <body>
 <div class="container">
