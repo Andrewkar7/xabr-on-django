@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.views.generic.base import View
 
 from .forms import CommentForm
-from .models import Category, Post, Comments, Likes
+from .models import Category, Post, Comments, Like
 from xabr.settings import LOGIN_URL
 
 from authapp.models import XabrUser
@@ -106,7 +106,7 @@ def change_like(request, slug):
         #return HttpResponseRedirect(reverse('mainapp/post.html'))
     #posts = post.filter(user=request.user)
     #like = post.like_quantity_set.filter(slug=slug, user=request.user)
-    likes = Likes.objects.filter(user=request.user)
+    likes = Like.objects.filter(user=request.user)
     #likes = get_object_or_404(Likes, user=request.user)
     #likes = Likes.objects.all()
     like = likes.like_quantity.filter(post=post)
