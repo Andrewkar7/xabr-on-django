@@ -78,14 +78,12 @@ def category_page(request, slug):
 
 def all_user_posts(request):
     categories = Category.objects.all()
-
     posts = Post.objects.filter(user=request.user).order_by('-create_datetime')
 
     context = {
         'page_title': 'главная',
         'posts': posts,
         'categories': categories,
-
     }
     return render(request, 'mainapp/all_user_posts.html', context)
 

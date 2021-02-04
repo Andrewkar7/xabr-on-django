@@ -47,8 +47,6 @@ class Post(models.Model):
         return reverse('blogapp:post_detail', args=[str(self.id)])
 
 
-
-
 class Comments(models.Model):
     '''класс комментариев к постам'''
     user = models.ForeignKey(XabrUser, verbose_name="пользователь", on_delete=models.CASCADE)
@@ -65,7 +63,6 @@ class Comments(models.Model):
 
     def __str__(self):
         return "{}".format(self.user)
-
 
 
 class Like(models.Model):

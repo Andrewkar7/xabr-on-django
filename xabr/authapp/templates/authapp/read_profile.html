@@ -1,7 +1,6 @@
 {% extends 'authapp/base.html' %}
 {% load static %}
 {% load my_tags %}
-
 {% block css %}
     <link href="{% static 'css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/registration.css' %}">
@@ -17,32 +16,32 @@
         <div class="media-body">
             <form>
                 <div class="form-group">
-                    <label for="formGroupExampleInput">Login</label>
+                    <label for="username">Login</label>
                     <input type="text" class="form-control text-dark" id="username"
                            placeholder="{{ user.username|title }}">
                 </div>
                 {% if user.first_name %}
                     <div class="form-group">
-                        <label for="formGroupExampleInput">Имя</label>
+                        <label for="first_name">Имя</label>
                         <input type="text" class="form-control text-dark" id="first_name"
                                placeholder="{{ user.first_name|title }}">
                     </div>
                 {% endif %}
                 {% if user.last_name %}
                     <div class="form-group">
-                        <label for="formGroupExampleInput2">Фамилия</label>
+                        <label for="last_name">Фамилия</label>
                         <input type="text" class="form-control" id="last_name"
                                placeholder="{{ user.last_name|title }}">
                     </div>
                 {% endif %}
                 <div class="form-group">
-                    <label for="formGroupExampleInput">Email</label>
+                    <label for="staticEmail">Email</label>
                     <input type="text" class="form-control text-dark" id="staticEmail"
                            placeholder="{{ user.email }}">
                 </div>
                 {% if user.age %}
                     <div class="form-group">
-                        <label for="formGroupExampleInput2">Возраст</label>
+                        <label for="age">Возраст</label>
                         <input type="text" class="form-control" id="age"
                                placeholder="{{ user.age }}">
                     </div>
@@ -52,7 +51,7 @@
     </div>
     {% if user.aboutMe %}
         <div class="form-group">
-            <label for="formGroupExampleInput2">О себе</label>
+            <label for="aboutMe">О себе</label>
             <input type="text" class="form-control" id="aboutMe"
                    placeholder="{{ user.aboutMe }}">
         </div>
@@ -63,12 +62,10 @@
     <a class="mt-1 btn btn-lg btn-primary form-control" href="{% url 'main:index' %}">
         На главную
     </a>
-
     <footer class="my-4 pt-5 text-muted text-center text-small">
         <p class="mb-1">&copy; 2020-{% now 'Y' %} Команда №1</p>
         <ul class="list-inline">
             <li class="list-inline-item"><a href="#">Support</a></li>
         </ul>
     </footer>
-
 {% endblock %}
