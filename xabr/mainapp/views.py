@@ -23,7 +23,6 @@ def index(request):
     return render(request, 'mainapp/index.html', context)
 
 
-
 def post(request, slug):
     '''вывод полной статьи'''
 
@@ -48,7 +47,6 @@ def post(request, slug):
         'form': form,
     }
     return render(request, 'mainapp/post.html', context)
-
 
 
 def help(request):
@@ -78,12 +76,10 @@ def category_page(request, slug):
     return render(request, 'mainapp/category_page.html', context)
 
 
-
 def all_user_posts(request):
     categories = Category.objects.all()
 
     posts = Post.objects.filter(user=request.user).order_by('-create_datetime')
-
 
     context = {
         'page_title': 'главная',
