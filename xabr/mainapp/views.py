@@ -49,7 +49,6 @@ def post(request, slug):
     return render(request, 'mainapp/post.html', context)
 
 
-
 def help(request):
     categories = Category.objects.all()
     context = {
@@ -77,7 +76,6 @@ def category_page(request, slug):
     return render(request, 'mainapp/category_page.html', context)
 
 
-
 def all_user_posts(request):
     categories = Category.objects.all()
 
@@ -92,20 +90,20 @@ def all_user_posts(request):
 
 
 def change_like(request, slug):
-    #post = Post.objects.filter(slug=slug, user=request.user)
-    #post = Post.objects.all()
-    #post = Post.objects.filter(slug=slug)
+    # post = Post.objects.filter(slug=slug, user=request.user)
+    # post = Post.objects.all()
+    # post = Post.objects.filter(slug=slug)
     post = get_object_or_404(Post, slug=slug)
-    #if request.method == 'POST':
-        #post.is_active = not post.is_active             # попыпка прописать выключатель активности лайка,пока не получилоась
-        #post.like_quantity += 1
-        #post.save()
-        #return HttpResponseRedirect(reverse('mainapp/post.html'))
-    #posts = post.filter(user=request.user)
-    #like = post.like_quantity_set.filter(slug=slug, user=request.user)
+    # if request.method == 'POST':
+    # post.is_active = not post.is_active             # попыпка прописать выключатель активности лайка,пока не получилоась
+    # post.like_quantity += 1
+    # post.save()
+    # return HttpResponseRedirect(reverse('mainapp/post.html'))
+    # posts = post.filter(user=request.user)
+    # like = post.like_quantity_set.filter(slug=slug, user=request.user)
     likes = Likes.objects.filter(user=request.user)
-    #likes = get_object_or_404(Likes, user=request.user)
-    #likes = Likes.objects.all()
+    # likes = get_object_or_404(Likes, user=request.user)
+    # likes = Likes.objects.all()
     like = likes.like_quantity.filter(post=post)
 
     if like >= 0:
