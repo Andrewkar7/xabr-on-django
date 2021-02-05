@@ -38,6 +38,7 @@ class Post(models.Model):
     is_active = models.BooleanField(verbose_name='активна', default=True)
     comment = models.TextField(verbose_name='комментарии', blank=True)
 
+
     # при makemigrations необходимо указывать в [default: timezone.now] >>> timezone.now
 
     def __str__(self):
@@ -46,21 +47,6 @@ class Post(models.Model):
     def get_absolute_url(self):  # Тут мы создали новый метод
         return reverse('blogapp:post_detail', args=[str(self.id)])
 
-
-class Likes(models.Model):
-    '''класс лайков к постам'''
-    user = models.ForeignKey(XabrUser, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, verbose_name="пост", on_delete=models.CASCADE)
-    slug = models.SlugField(verbose_name='URL', max_length=70, default='')
-    like_quantity = models.PositiveIntegerField('кол-во', default=0)
-    created = models.DateTimeField("дата добавления", auto_now_add=True, null=True)
-
-    class Meta:
-        verbose_name = "лайк"
-        verbose_name_plural = "лайки"
-
-    def __str__(self):
-        return "{}".format(self.user)
 
 
 
