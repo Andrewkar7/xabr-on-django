@@ -26,10 +26,10 @@
                     <a class="btn btn-outline-primary" href="{% url 'main:post' post.slug %}" tabindex="-1" aria-disabled="true">Комментировать</a>
                     <form action="{% url 'main:change_like' post.slug %}" method="post">
                         {% csrf_token%}
-                        {% if post.is_active%}
-                            <button class="btn btn-outline-primary"><i class="fa fa-heart" aria-hidden="true" ></i>{{post.like_quantity}}</button>
-                        {% else %}
+                        {% if new_like.is_active%}
                             <button class="btn btn-outline-primary"><i class="fa fa-heart-o" aria-hidden="true" ></i>{{post.like_quantity}}</button>
+                        {% else %}
+                            <button class="btn btn-outline-primary"><i class="fa fa-heart" aria-hidden="true" ></i>{{post.like_quantity}}</button>
                         {% endif %}
                     </form>
 
@@ -37,7 +37,6 @@
                         <a class="btn btn-outline-primary" href="{% url 'auth:login' %}?next={{request.path}}" tabindex="-1" aria-disabled="true">Комментировать</a>
                         <a class="btn btn-outline-primary" href="{% url 'auth:login' %}?next={{request.path}}"><i class="fa fa-heart" aria-hidden="true" ></i>{{post.like_quantity}}</a>
                     {% endif %}
-
 
                 </nav>
 

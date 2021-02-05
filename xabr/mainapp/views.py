@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.views.generic.base import View
 
 from .forms import CommentForm
-from .models import Category, Post, Comments
+from .models import Category, Post, Comments, Like
 from xabr.settings import LOGIN_URL
 
 from authapp.models import XabrUser
@@ -31,17 +31,17 @@ def post(request, slug):
     posts = Post.objects.filter(slug=slug)
     categories = Category.objects.all()
     comment = Comments.objects.filter(slug=slug)
+    #comment = post.comments.filter(active=True)
     if request.method == "POST":
-        form = CommentForm(request.POST)
+        form = CommentForm(data=request.POST)
         if form.is_valid():
             form = form.save(commit=False)
             form.user = request.user
-            form.post = posts          #в этой строке из-за слагов форма комментария не сохраняется
+            form.post = posts              #в этой строке из-за слагов форма комментария не сохраняется
             form.save()
-            return redirect(post, slug)
+            #return redirect(post)
     else:
         form = CommentForm()
-
 
     context = {
         'page_title': 'хабр',
@@ -51,7 +51,6 @@ def post(request, slug):
         'form': form,
     }
     return render(request, 'mainapp/post.html', context)
-
 
 
 def help(request):
@@ -84,9 +83,7 @@ def category_page(request, slug):
 
 def all_user_posts(request):
     categories = Category.objects.all()
-
     posts = Post.objects.filter(user=request.user).order_by('-create_datetime')
-
 
     context = {
         'page_title': 'главная',
@@ -98,23 +95,27 @@ def all_user_posts(request):
 
 
 def change_like(request, slug):
-
     post = get_object_or_404(Post, slug=slug)
+    new_like, created = Like.objects.get_or_create(user=request.user, slug=slug)
+
     if request.method == 'POST':
-        post.is_active = not post.is_active         # попыпка прописать выключатель активности лайка,пока не получилоась
-        if post.is_active:
+        new_like.is_active = not new_like.is_active
+        if not new_like.is_active:
             post.like_quantity += 1
             post.save()
+            new_like.save()
         else:
             post.like_quantity -= 1
             post.save()
-        #return HttpResponseRedirect(reverse('mainapp/post.html'))
+            new_like.save()
+        context = {
+            'new_like': new_like,
+            }
+
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'), context)
 
 
-    if LOGIN_URL in request.META.get('HTTP_REFERER'):
-        return HttpResponseRedirect(reverse('mainapp/post.html', kwargs={'slug': slug}))
-    else:
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 
 
 
