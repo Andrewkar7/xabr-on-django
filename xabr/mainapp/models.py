@@ -51,8 +51,6 @@ class Likes(models.Model):
     '''класс лайков к постам'''
     user = models.ForeignKey(XabrUser, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, verbose_name="пост", on_delete=models.CASCADE)
-    slug = models.SlugField(verbose_name='URL', max_length=70, default='')
-    like_quantity = models.PositiveIntegerField('кол-во', default=0)
     created = models.DateTimeField("дата добавления", auto_now_add=True, null=True)
 
     class Meta:
