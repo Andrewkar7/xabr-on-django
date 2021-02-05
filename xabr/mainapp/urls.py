@@ -10,10 +10,5 @@ urlpatterns = [
     path('category/<slug:slug>/', mainapp.category_page, name='category_page'),
     path('changelike/<slug:slug>/', mainapp.change_like, name='change_like'),
     path('all-user-posts/', mainapp.all_user_posts, name='all_user_posts'),
-    #path('likes/', include([
-        #path('add/', AddLikeView.as_view(), name='add'),
-        #path('remove/', RemoveLikeView.as_view(), name='remove'),
-    #]))
-
 ]
 

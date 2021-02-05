@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.views.generic.base import View
 
 from .forms import CommentForm
-from .models import Category, Post, Comments, Like
+from .models import Category, Post, Comments, Likes
 from xabr.settings import LOGIN_URL
 
 from authapp.models import XabrUser
@@ -102,25 +102,32 @@ def change_like(request, slug):
         #return HttpResponseRedirect(reverse('mainapp/post.html'))
     #posts = post.filter(user=request.user)
     #like = post.like_quantity_set.filter(slug=slug, user=request.user)
-    likes = Like.objects.filter(user=request.user)
+    '''likes = Likes.objects.filter(user=request.user)'''
     #likes = get_object_or_404(Likes, user=request.user)
     #likes = Likes.objects.all()
-    like = likes.like_quantity.filter(post=post)
+    '''like = likes.like_quantity.filter(post=post)'''
 
-    if like >= 0:
-        post.like_quantity += 1
-        post.save()
+    like = request.user.likes.filter(slug=slug).first()
+    like = Likes(user=request.user) #, post=post
+    print(request.user.id)
+    print(post.user_id)
+    print(post.id)
+
+    id = Likes.objects.filter(post=post.user.id)
+    print(f'idd {id}')
+
+    if not like:
+        like.like_quantity += 1
+        like.save()
     else:
-        post.like_quantity -= 1
-        post.save()
+        pass
+        #like.delete()
+
 
     if LOGIN_URL in request.META.get('HTTP_REFERER'):
         return HttpResponseRedirect(reverse('mainapp/post.html', kwargs={'slug': slug}))
     else:
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-
-
 
 #class AddLikeView(View):
     #def post(self, request, *args, **kwargs):

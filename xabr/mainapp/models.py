@@ -28,7 +28,7 @@ class Category(models.Model):
 class Post(models.Model):
     '''класс поста'''
     user = models.ForeignKey(XabrUser, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, verbose_name='категория', on_delete=models.CASCADE)
     name = models.CharField(verbose_name='название статьи', max_length=128)
     slug = models.SlugField(verbose_name='URL', max_length=70)
     description = models.TextField(verbose_name='краткое описание статьи', blank=True)
@@ -65,18 +65,26 @@ class Comments(models.Model):
         return "{}".format(self.user)
 
 
-class Like(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             related_name='likes',
-                             on_delete=models.CASCADE)
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
-    content_object = GenericForeignKey('content_type', 'object_id')
+class Likes(models.Model):
+    '''класс лайков к постам'''
+    user = models.ForeignKey(XabrUser, on_delete=models.CASCADE, related_name='likes')
+    post = models.ForeignKey(Post, verbose_name="пост", on_delete=models.CASCADE)
+    slug = models.SlugField(verbose_name='URL', max_length=70, default='')
+    like_quantity = models.PositiveIntegerField('кол-во', default=0)
+    created = models.DateTimeField("дата добавления", auto_now_add=True, null=True)
+
+    class Meta:
+        verbose_name = "лайк"
+        verbose_name_plural = "лайки"
+        #unique_together = ("post", "user", "like_quantity")
+
+    def __str__(self):
+        return "{}".format(self.user)
 
 
 class Tweet(models.Model):
     body = models.CharField(max_length=140)
-    likes = GenericRelation(Like)
+    likes = GenericRelation(Likes)
 
     def __str__(self):
         return self.body
