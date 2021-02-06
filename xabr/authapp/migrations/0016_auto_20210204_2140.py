@@ -4,5 +4,17 @@ import datetime
 from django.db import migrations, models
 from django.utils.timezone import utc
 
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('authapp', '0015_auto_20210204_2034'),
+    ]
+
+    operations = [
+        migrations.AlterField(
+            model_name='xabruser',
+            name='activation_key_expires',
+            field=models.DateTimeField(default=datetime.datetime(2021, 2, 6, 18, 40, 17, 512177, tzinfo=utc)),
         ),
     ]
