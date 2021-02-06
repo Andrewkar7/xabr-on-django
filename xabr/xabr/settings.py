@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -72,7 +71,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'xabr.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -81,8 +79,15 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+    # 'default': {
+    #     'NAME': 'xabr',
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'USER': 'django',
+    #     'PASSWORD': 'geekbrains',
+    #     'HOST': 'DmitryGrodzinsky-2049.postgres.pythonanywhere-services.com',
+    #     'PORT': 12049,
+    # }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -101,7 +106,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -133,9 +137,6 @@ JSON_PATH = 'mainapp/json'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGIN_URL = '/auth/login/'
-
-
 # Backend Test
 DOMAIN_NAME = 'http://localhost:8000'
 
@@ -151,10 +152,3 @@ EMAIL_USE_TLS = True
 # вариант логирования сообщений почты в виде файлов вместо отправки
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 EMAIL_FILE_PATH = 'tmp/email-messages/'
-TEMPLATE_CONTEXT_PROCESSORS = (
-    "django.core.context_processors.auth",
-    "django.core.context_processors.debug",
-    "django.core.context_processors.i18n",
-    "django.core.context_processors.media",
-    "django.core.context_processors.request",
-)

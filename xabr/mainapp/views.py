@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.views.generic.base import View
 
 from .forms import CommentForm
-from .models import Category, Post, Comments, Likes
+from .models import Category, Post, Comments, Like
 from xabr.settings import LOGIN_URL
 
 from authapp.models import XabrUser
@@ -94,55 +94,27 @@ def change_like(request, slug):
     # post = Post.objects.all()
     # post = Post.objects.filter(slug=slug)
     post = get_object_or_404(Post, slug=slug)
-    # if request.method == 'POST':
-    # post.is_active = not post.is_active             # попыпка прописать выключатель активности лайка,пока не получилоась
-    # post.like_quantity += 1
-    # post.save()
-    # return HttpResponseRedirect(reverse('mainapp/post.html'))
-    # posts = post.filter(user=request.user)
-    # like = post.like_quantity_set.filter(slug=slug, user=request.user)
-    likes = Likes.objects.filter(user=request.user)
-    # likes = get_object_or_404(Likes, user=request.user)
-    # likes = Likes.objects.all()
-    like = likes.like_quantity.filter(post=post)
+    new_like, created = Like.objects.get_or_create(user=request.user, slug=slug)
 
-    if like >= 0:
-        post.like_quantity += 1
-        post.save()
-    else:
-        post.like_quantity -= 1
-        post.save()
+    if request.method == 'POST':
+        new_like.is_active = not new_like.is_active
+        if not new_like.is_active:
+            post.like_quantity += 1
+            post.save()
+            new_like.save()
+        else:
+            post.like_quantity -= 1
+            post.save()
+            new_like.save()
+        context = {
+            'new_like': new_like,
+            }
+
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'), context)
 
     if LOGIN_URL in request.META.get('HTTP_REFERER'):
         return HttpResponseRedirect(reverse('mainapp/post.html', kwargs={'slug': slug}))
     else:
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
-# class AddLikeView(View):
-# def post(self, request, *args, **kwargs):
-# blog_post_id = int(request.POST.get('blog_post_id'))
-# user_id = int(request.POST.get('user_id'))
-# url_form = request.POST.get('url_form')
 
-# user_inst = XabrUser.objects.get(id=user_id)
-# blog_post_inst = Post.objects.get(id=blog_post_id)
-
-# try:
-# blog_like_inst = Post.objects.get(blog_post=blog_post_inst, liked_by=user_inst)
-# except Exception as e:
-# blog_like = BlogLikes.objects(blog_post_inst, liked_by=user_inst, like=True)
-# blog_like.save
-
-# return redirect(url_form)
-
-
-# class RemoveLikeView(View):
-# def post(self, request, *args, **kwargs):
-# blog_likes_id = int(request.POST.get('blog_likes_id'))
-# url_form = request.POST.get('url_form')
-
-
-# blog_like = BlogLikes.objects(id=blog_likes_id)
-# blog_like.delete()
-
-# return redirect(url_form)

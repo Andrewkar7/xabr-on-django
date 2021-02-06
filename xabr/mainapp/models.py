@@ -38,6 +38,7 @@ class Post(models.Model):
     is_active = models.BooleanField(verbose_name='активна', default=True)
     comment = models.TextField(verbose_name='комментарии', blank=True)
 
+
     # при makemigrations необходимо указывать в [default: timezone.now] >>> timezone.now
 
     def __str__(self):
@@ -47,36 +48,29 @@ class Post(models.Model):
         return reverse('blogapp:post_detail', args=[str(self.id)])
 
 
-class Likes(models.Model):
-    '''класс лайков к постам'''
-    user = models.ForeignKey(XabrUser, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post, verbose_name="пост", on_delete=models.CASCADE)
-    created = models.DateTimeField("дата добавления", auto_now_add=True, null=True)
-
-    class Meta:
-        verbose_name = "лайк"
-        verbose_name_plural = "лайки"
-
-    def __str__(self):
-        return "{}".format(self.user)
-
 
 
 class Comments(models.Model):
     '''класс комментариев к постам'''
-    user = models.ForeignKey(XabrUser, verbose_name="пользователь", on_delete=models.CASCADE)
+    user = models.ForeignKey(XabrUser, related_name='comments', on_delete=models.CASCADE)
     post = models.ForeignKey(Post, verbose_name="пост", on_delete=models.CASCADE)
     slug = models.SlugField(verbose_name='URL', max_length=70, default='')
     text = models.TextField("комментировать")
     created = models.DateTimeField("дата добавления", auto_now_add=True, null=True)
     moderation = models.BooleanField("модерация", default=False)
     email = models.EmailField()
+    active = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = "комментарий"
         verbose_name_plural = "комментарии"
+        ordering = ('created',)
 
     def __str__(self):
         return "{}".format(self.user)
 
 
+class Like(models.Model):
+    user = models.ForeignKey(XabrUser, on_delete=models.CASCADE)
+    slug = models.SlugField(verbose_name='URL', max_length=70, default='')
+    is_active = models.BooleanField(verbose_name='активна', default=True)
