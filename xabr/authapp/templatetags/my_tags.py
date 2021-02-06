@@ -8,9 +8,9 @@ register = template.Library()
 def media_folder_users(string):
     """
     Автоматически добавляет относительный URL-путь к медиафайлам пользователей
-    users_avatars/user1.jpg --> /media/users_avatars/user1.jpg
+    users_avatars/user1.jpg --> /media/users_avatars/user1.jpg media/users_avatars/default.jpg
     """
     if not string:
-        string = 'users_avatar/default.png'
+        string = 'users_avatars/default.png'
 
     return f'{settings.MEDIA_URL}{string}'

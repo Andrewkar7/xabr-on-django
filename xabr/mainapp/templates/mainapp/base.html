@@ -9,26 +9,36 @@
             {{ page_title|title }}
         {% endblock %}
     </title>
-    <link href="{% static 'css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block css %}
+        <link href="{% static 'css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/font-awesome/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% endblock %}
+    {% block js %}
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    {% endblock %}
 </head>
 <body>
 <div class="container">
     {% block container %}
+        {% include 'mainapp/includes/inc__header.html' %}
+        {% include 'mainapp/includes/inc__main_menu.html' %}
     {% endblock %}
 </div>
 <div role="main" class="container">
     {% block main %}
     {% endblock %}
 </div>
-{% block footer %}
-    <footer class="blog-footer">
+    {% block footer %}
+    <footer class="blog-footer text-center">
         <p>&copy; 2020-{% now 'Y' %} Команда №1 </p>
         <p>
             <a href="#">Back to top</a>
         </p>
     </footer>
-{% endblock %}
+    {% endblock %}
 </body>
 </html>
