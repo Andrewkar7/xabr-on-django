@@ -1,7 +1,8 @@
 import json
-
+from django.shortcuts import render, HttpResponseRedirect
+from django.urls import reverse
 from django.contrib.contenttypes.models import ContentType
-from django.http import HttpResponse
+from django.http import HttpResponse, request
 from django.shortcuts import render, get_object_or_404
 from django.views import View
 
@@ -9,6 +10,8 @@ from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 
+from authapp.forms import XabrUserEditForm
+from blogapp.forms import BlogUserEditForm
 from mainapp.models import Post
 
 from mainapp.models import Category

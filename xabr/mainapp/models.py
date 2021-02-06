@@ -28,7 +28,7 @@ class Category(models.Model):
 class Post(models.Model):
     '''класс поста'''
     user = models.ForeignKey(XabrUser, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, verbose_name='категория', on_delete=models.CASCADE)
     name = models.CharField(verbose_name='название статьи', max_length=128)
     slug = models.SlugField(verbose_name='URL', max_length=70)
     description = models.TextField(verbose_name='краткое описание статьи', blank=True)
@@ -48,11 +48,9 @@ class Post(models.Model):
         return reverse('blogapp:post_detail', args=[str(self.id)])
 
 
-
-
 class Comments(models.Model):
     '''класс комментариев к постам'''
-    user = models.ForeignKey(XabrUser, related_name='comments', on_delete=models.CASCADE)
+    user = models.ForeignKey(XabrUser, related_name="comments", on_delete=models.CASCADE)
     post = models.ForeignKey(Post, verbose_name="пост", on_delete=models.CASCADE)
     slug = models.SlugField(verbose_name='URL', max_length=70, default='')
     text = models.TextField("комментировать")

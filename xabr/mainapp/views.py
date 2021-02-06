@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render, get_object_or_404, redirect
+from django.template.loader import render_to_string
 from django.urls import reverse
 from django.views.generic.base import View
 
@@ -23,22 +24,25 @@ def index(request):
     return render(request, 'mainapp/index.html', context)
 
 
+
 def post(request, slug):
     '''вывод полной статьи'''
 
     posts = Post.objects.filter(slug=slug)
     categories = Category.objects.all()
     comment = Comments.objects.filter(slug=slug)
+    #comment = post.comments.filter(active=True)
     if request.method == "POST":
-        form = CommentForm(request.POST)
+        form = CommentForm(data=request.POST)
         if form.is_valid():
             form = form.save(commit=False)
             form.user = request.user
-            form.post = posts  # в этой строке из-за слагов форма комментария не сохраняется
+            form.post = posts              #в этой строке из-за слагов форма комментария не сохраняется
             form.save()
-            return redirect(post, slug)
+            #return redirect(post)
     else:
         form = CommentForm()
+
     context = {
         'page_title': 'хабр',
         'posts': posts,
@@ -76,23 +80,21 @@ def category_page(request, slug):
     return render(request, 'mainapp/category_page.html', context)
 
 
+
 def all_user_posts(request):
     categories = Category.objects.all()
-
     posts = Post.objects.filter(user=request.user).order_by('-create_datetime')
 
     context = {
         'page_title': 'главная',
         'posts': posts,
         'categories': categories,
+
     }
     return render(request, 'mainapp/all_user_posts.html', context)
 
 
 def change_like(request, slug):
-    # post = Post.objects.filter(slug=slug, user=request.user)
-    # post = Post.objects.all()
-    # post = Post.objects.filter(slug=slug)
     post = get_object_or_404(Post, slug=slug)
     new_like, created = Like.objects.get_or_create(user=request.user, slug=slug)
 
@@ -112,9 +114,9 @@ def change_like(request, slug):
 
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'), context)
 
-    if LOGIN_URL in request.META.get('HTTP_REFERER'):
-        return HttpResponseRedirect(reverse('mainapp/post.html', kwargs={'slug': slug}))
-    else:
-        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+
+
 
 

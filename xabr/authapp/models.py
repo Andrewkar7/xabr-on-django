@@ -1,5 +1,4 @@
 from datetime import timedelta
-
 from django.core.mail import send_mail
 from django.db import models
 from django.contrib.auth.models import AbstractUser
@@ -7,7 +6,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.timezone import now
-
 from xabr import settings
 
 
@@ -24,7 +22,10 @@ class XabrUser(AbstractUser):
     like_quantity = models.PositiveIntegerField('кол-во', default=0)
 
     def is_activation_key_expired(self):
-        return now() > self.activation_key_expires
+        if now() <= self.activation_key_expires:
+            return False
+        else:
+            return True
 
     def send_verify_mail(self):
         verify_link = reverse(
@@ -39,3 +40,4 @@ class XabrUser(AbstractUser):
                   f'{settings.DOMAIN_NAME} перейдите по ссылке: \n{settings.DOMAIN_NAME}{verify_link}'
 
         return send_mail(title, message, settings.EMAIL_HOST_USER, [self.email], fail_silently=False)
+
