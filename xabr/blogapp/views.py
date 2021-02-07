@@ -10,8 +10,6 @@ from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 
-from authapp.forms import XabrUserEditForm
-from blogapp.forms import BlogUserEditForm
 from mainapp.models import Post
 
 from mainapp.models import Category
