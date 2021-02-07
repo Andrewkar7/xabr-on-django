@@ -20,6 +20,7 @@ class Category(models.Model):
     name = models.CharField(verbose_name='название категории', max_length=64, default='', unique=True)
     slug = models.SlugField(verbose_name='URL', max_length=70)
     description = models.TextField(verbose_name='описание категории', blank=True)
+    is_active = models.BooleanField(verbose_name='активна', default=True)
 
     def __str__(self):
         return self.name
@@ -35,7 +36,7 @@ class Post(models.Model):
     posts_text = models.TextField(verbose_name='текст статьи', blank=True)
     create_datetime = models.DateTimeField(verbose_name='дата создания', auto_now_add=True, blank=True)
     like_quantity = models.PositiveIntegerField('кол-во', default=0)
-    is_active = models.BooleanField(verbose_name='активна', default=True)
+    is_active = models.BooleanField(verbose_name='активна', default=False)
     comment = models.TextField(verbose_name='комментарии', blank=True)
 
     # при makemigrations необходимо указывать в [default: timezone.now] >>> timezone.now

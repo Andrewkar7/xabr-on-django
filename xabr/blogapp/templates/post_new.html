@@ -12,12 +12,11 @@
                 <p class="card-text">Категория:{{ form.category }}</p>
                 <p class="card-text">Название статьи:</p>
                 <p class="form-control text-dark text" >{{ form.name }}</p>
-
-
                 <p class="card-text">URL:{{ form.slug }}</p>
                 <p class="card-text">user:{{ form.user }}</p>
                 <p class="card-text">Краткое описание статьи:{{ form.description }}</p>
                 <p class="card-text">Текст статьи:{{ form.posts_text }}</p>
+                <p class="card-text">опубликовать/черновик:{{ form.is_active }}</p>
                 </div>
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <input class="btn btn-secondary" type="submit" value="опубликовать "/>

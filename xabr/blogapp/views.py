@@ -1,25 +1,25 @@
-import json
-from django.shortcuts import render, HttpResponseRedirect
-from django.urls import reverse
-from django.contrib.contenttypes.models import ContentType
-from django.http import HttpResponse, request
-from django.shortcuts import render, get_object_or_404
-from django.views import View
-
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
-
 from mainapp.models import Post
-
-from mainapp.models import Category
-
-from authapp.models import XabrUser
 
 
 class BlogListView(ListView):
     model = Post
     template_name = 'post_list.html'
+
+    def get_queryset(self):
+        qs = Post.objects.filter(is_active=True).order_by('-create_datetime')
+        return qs
+
+
+class DraftListView(ListView):
+    model = Post
+    template_name = 'post_draft.html'
+
+    def get_queryset(self):
+        qs = Post.objects.filter(is_active=False).order_by('-create_datetime')
+        return qs
 
 
 class BlogDetailView(DetailView):
@@ -30,7 +30,7 @@ class BlogDetailView(DetailView):
 class BlogCreateView(CreateView):
     model = Post
     template_name = 'post_new.html'
-    fields = ['user', 'category', 'name', 'slug', 'description', 'posts_text']
+    fields = ['user', 'category', 'name', 'slug', 'description', 'posts_text', 'is_active']
 
 
 class BlogUpdateView(UpdateView):
