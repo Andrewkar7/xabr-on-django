@@ -24,7 +24,6 @@ def index(request):
     return render(request, 'mainapp/index.html', context)
 
 
-
 def post(request, slug):
     '''вывод полной статьи'''
 
