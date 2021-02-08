@@ -30,6 +30,7 @@
                 <p class="card-text"><label for="id_posts_text">Текст статьи:</label>
                     <textarea name="posts_text" style="width: 100%; height: 400px;" id="id_posts_text"> {{ object.posts_text }}
         </textarea></p>
+                <p class="card-text">опубликовать/черновик:{{ object.is_active }}</p>
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <input class="btn btn-secondary" type="submit" value="Обновить"/>
                 </div>

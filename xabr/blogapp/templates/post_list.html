@@ -3,9 +3,9 @@
 {% load my_tags %}
 {% block main %}
 <div class="mt-3 posts text-left">
-    <h3 class="text-center"> Ваши статьи на Xabr:</h3>
+    <h3 class="text-center"> Ваши опубликованые статьи на Xabr:</h3>
     {% for object in object_list %}
-    {% if object.user.first_name == request.user.first_name%}
+    {% if object.user.first_name == request.user.first_name and object.is_active == True %}
     <div class="card ">
         <div class="card-header">
             Категория: {{ object.category }}
