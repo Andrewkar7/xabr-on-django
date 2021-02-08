@@ -44,7 +44,7 @@ class Post(models.Model):
     def __str__(self):
         return f"{self.name} ({self.category.name})"
 
-    def get_absolute_url(self):  # Тут мы создали новый метод
+    def get_absolute_url(self):
         return reverse('blogapp:post_detail', args=[str(self.id)])
 
 
