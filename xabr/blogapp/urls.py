@@ -6,7 +6,7 @@ from . import views
 from django.urls import path
 
 
-from .views import BlogListView, BlogDetailView, BlogCreateView, BlogUpdateView, BlogDeleteView
+from .views import BlogListView, BlogDetailView, BlogCreateView, BlogUpdateView, BlogDeleteView, DraftListView
 
 app_name = 'blog'
 
@@ -16,5 +16,6 @@ urlpatterns = [
     path('post/<int:pk>/', BlogDetailView.as_view(), name='post_detail'),
     path('post/', BlogListView.as_view(), name='post_list'),
     path('post/<int:pk>/delete/', BlogDeleteView.as_view(), name='post_delete'),
+    path('post/draft/', DraftListView.as_view(), name='post_draft'),
 
 ]

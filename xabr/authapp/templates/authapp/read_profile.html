@@ -66,7 +66,9 @@
         {% if posts %}
             <h3> Ваши статьи на Xabr:</h3>
         <a type="button" class="btn btn-secondary"
-                               href="{% url 'blog:post_list' %}">Все статьи</a><br><br>
+                               href="{% url 'blog:post_list' %}">Все статьи</a>
+        <a type="button" class="btn btn-secondary"
+           href="{% url 'blog:post_draft' %}">Черновики</a><br><br>
             {% for post in posts %}
                 <div class="card ">
                     <div class="card-header">
