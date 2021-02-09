@@ -50,7 +50,7 @@ class Post(models.Model):
 
 class Comments(models.Model):
     '''класс комментариев к постам'''
-    user = models.ForeignKey(XabrUser, related_name="comments", on_delete=models.CASCADE)
+    user = models.ForeignKey(XabrUser, related_name='comments', on_delete=models.CASCADE)
     post = models.ForeignKey(Post, verbose_name="пост", on_delete=models.CASCADE)
     slug = models.SlugField(verbose_name='URL', max_length=70, default='')
     text = models.TextField("комментировать")
