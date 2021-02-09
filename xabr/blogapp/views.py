@@ -10,18 +10,18 @@ class BlogListView(ListView):
     model = Post
     template_name = 'post_list.html'
 
-    # def get_queryset(self):
-    #    qs = Post.objects.filter(is_active=True).order_by('-create_datetime')
-    #   return qs
+    def get_queryset(self):
+        qs = Post.objects.filter(is_active=True).order_by('-create_datetime')
+        return qs
 
 
 class DraftListView(ListView):
     model = Post
     template_name = 'post_draft.html'
 
-    # def get_queryset(self):
-    #     qs = Post.objects.filter(is_active=False).order_by('-create_datetime')
-    #     return qs
+    def get_queryset(self):
+        qs = Post.objects.filter(is_active=False).order_by('-create_datetime')
+        return qs
 
 
 class BlogDetailView(DetailView):
