@@ -134,18 +134,28 @@ JSON_PATH = 'mainapp/json'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Backend Test
+# Email registration
 DOMAIN_NAME = 'http://localhost:8000'
-
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = '25'
-EMAIL_HOST_USER = 'django@xabr.local'
-EMAIL_HOST_PASSWORD = 'xabr'
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = '465'
+EMAIL_HOST_USER = 'xabr_komanda1@mail.ru'
+EMAIL_HOST_PASSWORD = ''
+DEFAULT_FROM_EMAIL = 'Xabr'
 EMAIL_USE_SSL = True
-EMAIL_USE_TLS = True
+EMAIL_USE_TLS = False
+
+# Backend Test
+# DOMAIN_NAME = 'http://localhost:8000'
+#
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = '25'
+# EMAIL_HOST_USER = 'django@xabr.local'
+# EMAIL_HOST_PASSWORD = 'xabr'
+# EMAIL_USE_SSL = True
+# EMAIL_USE_TLS = True
 # вариант python -m smtpd -n -c DebuggingServer localhost:25
 # EMAIL_HOST_USER, EMAIL_HOST_PASSWORD = None, None
 
 # вариант логирования сообщений почты в виде файлов вместо отправки
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = 'tmp/email-messages/'
+# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+# EMAIL_FILE_PATH = 'tmp/email-messages/'
