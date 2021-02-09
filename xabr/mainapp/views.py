@@ -7,9 +7,6 @@ from django.views.generic.base import View
 
 from .forms import CommentForm
 from .models import Category, Post, Comments, Like
-from xabr.settings import LOGIN_URL
-
-from authapp.models import XabrUser
 
 
 def index(request):
