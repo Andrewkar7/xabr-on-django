@@ -13,8 +13,8 @@ from authapp.models import XabrUser
 
 
 def index(request):
-    posts = Post.objects.filter(is_active=True).order_by('-create_datetime')
-    categories = Category.objects.filter(is_active=True)
+    posts = Post.objects.all().order_by('-create_datetime')
+    categories = Category.objects.all()
 
     context = {
         'page_title': 'главная',
@@ -24,10 +24,11 @@ def index(request):
     return render(request, 'mainapp/index.html', context)
 
 
+
 def post(request, slug):
     '''вывод полной статьи'''
 
-    posts = Post.objects.filter(slug=slug, is_active=True)
+    posts = Post.objects.filter(slug=slug)
     categories = Category.objects.all()
     comment = Comments.objects.filter(slug=slug)
     #comment = post.comments.filter(active=True)
@@ -38,7 +39,7 @@ def post(request, slug):
             form.user = request.user
             form.post = posts              #в этой строке из-за слагов форма комментария не сохраняется
             form.save()
-            return redirect(post)
+            #return redirect(post)
     else:
         form = CommentForm()
 
@@ -53,7 +54,7 @@ def post(request, slug):
 
 
 def help(request):
-    categories = Category.objects.filter(is_active=True)
+    categories = Category.objects.all()
     context = {
         'page_title': 'помощь',
         'categories': categories
@@ -62,29 +63,27 @@ def help(request):
 
 
 def category_page(request, slug):
-    categories = Category.objects.filter(is_active=True)
-    new_like, created = Like.objects.get_or_create(user=request.user, slug=slug)
+    categories = Category.objects.all()
     if slug == '':
         category = {'slug': '', 'name': 'все'}
-        posts = Post.objects.filter(is_active=True).order_by('-create_datetime')
+        posts = Post.objects.all().order_by('-create_datetime')
     else:
         category = get_object_or_404(Category, slug=slug)
-        posts = category.post_set.filter(is_active=True).order_by('-create_datetime')
+        posts = category.post_set.order_by('-create_datetime')
 
     context = {
         'page_title': 'главная',
         'categories': categories,
         'category': category,
         'posts': posts,
-        'new_like': new_like,
     }
     return render(request, 'mainapp/category_page.html', context)
 
 
 
 def all_user_posts(request):
-    categories = Category.objects.filter(is_active=True)
-    posts = Post.objects.filter(user=request.user,is_active=True).order_by('-create_datetime')
+    categories = Category.objects.all()
+    posts = Post.objects.filter(user=request.user).order_by('-create_datetime')
 
     context = {
         'page_title': 'главная',

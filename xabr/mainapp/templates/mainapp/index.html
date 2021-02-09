@@ -1,22 +1,30 @@
 {% extends 'mainapp/base.html' %}
 {% load static %}
+
+{% block container %}
+    {% include 'mainapp/includes/inc__header.html' %}
+    {% include 'mainapp/includes/inc__main_menu.html' %}
+{% endblock %}
 {% block main %}
+
     <div class="row">
         <div class="col-md-8 blog-main">
             <h3 class="">
                 Последние публикации
             </h3>
+
             {% for post in posts %}
             <div class="blog-post">
                 <h2 class="blog-post-title"><a href="{% url 'main:post' post.slug %}">{{post.name}}</a></h2>
-                <p class="blog-post-meta">{{post.create_datetime}} <a href="#">{{post.user}}</a></p>
+                <p class="blog-post-meta">{{post.create_datetime}} <a href="#">Mark</a></p>
 
                 <p>{{post.description}}</p>
                 <nav class="blog-pagination">
-                    <form action="{% url 'main:change_like' post.slug %}" method="post">
                     <a class="btn btn-outline-primary" href="{% url 'main:post' post.slug %}">Читать далее</a>
-                    {% if user.is_authenticated %}
+
+                    <{% if user.is_authenticated %}
                     <a class="btn btn-outline-primary" href="{% url 'main:post' post.slug %}" tabindex="-1" aria-disabled="true">Комментировать</a>
+                    <form action="{% url 'main:change_like' post.slug %}" method="post">
                         {% csrf_token%}
                         {% if new_like.is_active%}
                             <button class="btn btn-outline-primary"><i class="fa fa-heart-o" aria-hidden="true" ></i>{{post.like_quantity}}</button>
