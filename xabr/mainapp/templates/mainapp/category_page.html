@@ -14,7 +14,7 @@
         {% for post in posts %}
         <div class="blog-post">
             <h2 class="blog-post-title"><a href="{% url 'main:post' post.slug %}">{{post.name}}</a></h2>
-            <p class="blog-post-meta">{{post.create_datetime}} <a href="#">{{post.user}}</a></p>
+            <p class="blog-post-meta">{{post.create_datetime}} автор: {{post.user|title}}</p>
             <p>{{post.description}}</p>
             <nav class="blog-pagination">
                 <form action="{% url 'main:change_like' post.slug %}" method="post">
