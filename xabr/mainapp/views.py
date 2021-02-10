@@ -1,15 +1,8 @@
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
-from django.shortcuts import render, get_object_or_404, redirect
-from django.template.loader import render_to_string
-from django.urls import reverse
-from django.views.generic.base import View
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
 
 from .forms import CommentForm
 from .models import Category, Post, Comments, Like
-from xabr.settings import LOGIN_URL
-
-from authapp.models import XabrUser
 
 
 def index(request):
@@ -25,26 +18,26 @@ def index(request):
 
 
 def post(request, slug):
-    '''вывод полной статьи'''
+    """вывод полной статьи"""
 
-    posts = Post.objects.filter(slug=slug, is_active=True)
+    post = Post.objects.filter(slug=slug, is_active=True)
     categories = Category.objects.all()
-    comment = Comments.objects.filter(slug=slug)
-    #comment = post.comments.filter(active=True)
+    comment = Comments.objects.filter(post=post.first())
+
     if request.method == "POST":
         form = CommentForm(data=request.POST)
         if form.is_valid():
             form = form.save(commit=False)
             form.user = request.user
-            form.post = posts              #в этой строке из-за слагов форма комментария не сохраняется
+            form.post = post.first()
             form.save()
-            return redirect(post)
+
     else:
         form = CommentForm()
 
     context = {
         'page_title': 'хабр',
-        'posts': posts,
+        'posts': post,
         'categories': categories,
         'comments': comment,
         'form': form,
@@ -81,20 +74,6 @@ def category_page(request, slug):
     return render(request, 'mainapp/category_page.html', context)
 
 
-
-def all_user_posts(request):
-    categories = Category.objects.filter(is_active=True)
-    posts = Post.objects.filter(user=request.user,is_active=True).order_by('-create_datetime')
-
-    context = {
-        'page_title': 'главная',
-        'posts': posts,
-        'categories': categories,
-
-    }
-    return render(request, 'mainapp/all_user_posts.html', context)
-
-
 def change_like(request, slug):
     post = get_object_or_404(Post, slug=slug)
     new_like, created = Like.objects.get_or_create(user=request.user, slug=slug)
@@ -111,13 +90,6 @@ def change_like(request, slug):
             new_like.save()
         context = {
             'new_like': new_like,
-            }
+        }
 
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'), context)
-
-
-
-
-
-
-
