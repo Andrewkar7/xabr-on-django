@@ -18,16 +18,12 @@
             <p class="card-text">Текст статьи: {{ object.posts_text }}</p>
             <div class="btn-group" role="group" aria-label="Basic example">
                 <a type="button" class="btn btn-secondary"
-                   href="#">Опубликовать</a>
-                <a type="button" class="btn btn-secondary"
                    href="{% url 'blog:post_edit' object.pk %}">Редактировать статью</a>
                 <a type="button" class="btn btn-secondary"
                    href="{% url 'blog:post_delete' object.pk %}">Удалить статью</a>
             </div>
         </div>
     </div>
-    {% else %}
-    <p>У вас нет черновиков</p>
     {% endif %}
     {% endfor %}
 </div>
