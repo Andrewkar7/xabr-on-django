@@ -23,7 +23,7 @@
                 <p class="card-text"><label for="id_slug">URL:</label>
                     <input type="text" class="form-control text-dark text" name="slug" value="{{ object.slug }}"
                            maxlength="70"
-                           required id="id_slug"></p>
+                           required id="id_slug">{{ form.errors }}</p>
                 <p class="card-text"><label for="id_description">Краткое описание статьи:</label>
                     <textarea name="description" style="width: 100%; height: 150px;" id="id_description">{{ object.description }}
         </textarea></p>
