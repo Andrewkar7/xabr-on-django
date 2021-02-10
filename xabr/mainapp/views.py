@@ -1,9 +1,5 @@
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
-from django.shortcuts import render, get_object_or_404, redirect
-from django.template.loader import render_to_string
-from django.urls import reverse
-from django.views.generic.base import View
+from django.http import HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404
 
 from .forms import CommentForm
 from .models import Category, Post, Comments, Like
@@ -22,7 +18,7 @@ def index(request):
 
 
 def post(request, slug):
-    '''вывод полной статьи'''
+    """вывод полной статьи"""
 
     post = Post.objects.filter(slug=slug, is_active=True)
     categories = Category.objects.all()
