@@ -34,6 +34,7 @@ def logout(request):
 
 
 def register(request):
+    next = request.GET['next'] if 'next' in request.GET.keys() else ''
     if request.method == 'POST':
         register_form = XabrUserRegisterForm(request.POST, request.FILES)
         if register_form.is_valid():
@@ -50,10 +51,12 @@ def register(request):
     content = {
         'title': 'регистрация пользователя',
         'register_form': register_form,
+        'next': next,
     }
     return render(request, 'authapp/register.html', content)
 
 
+@login_required
 def read_profile(request):
     categories = Category.objects.all()
     posts = Post.objects.filter(user=request.user).order_by('-create_datetime')
@@ -100,4 +103,4 @@ def verify(request, email, activation_key):
         return render(request, 'authapp/verification.html')
     except Exception as e:
         print(f'error activation user : {e.args}')
-        return HttpResponseRedirect(reverse('main:home'))
+        return HttpResponseRedirect(reverse('mainapp:index'))
