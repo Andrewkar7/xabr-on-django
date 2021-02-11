@@ -10,6 +10,10 @@ class Category(models.Model):
     description = models.TextField(verbose_name='описание категории', blank=True)
     is_active = models.BooleanField(verbose_name='активна', default=True)
 
+    class Meta:
+        verbose_name = "категория"
+        verbose_name_plural = "категории"
+
     def __str__(self):
         return self.name
 
@@ -26,6 +30,10 @@ class Post(models.Model):
     like_quantity = models.PositiveIntegerField('кол-во', default=0)
     is_active = models.BooleanField(verbose_name='активна', default=False)
     comment = models.TextField(verbose_name='комментарии', blank=True)
+
+    class Meta:
+        verbose_name = "пост"
+        verbose_name_plural = "посты"
 
     def __str__(self):
         return f"{self.name} ({self.category.name})"
@@ -58,3 +66,7 @@ class Like(models.Model):
     user = models.ForeignKey(XabrUser, on_delete=models.CASCADE)
     slug = models.SlugField(verbose_name='URL', max_length=70, default='')
     is_active = models.BooleanField(verbose_name='активна', default=True)
+
+    class Meta:
+        verbose_name = "лайк"
+        verbose_name_plural = "лайки"
