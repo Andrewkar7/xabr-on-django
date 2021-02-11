@@ -39,4 +39,3 @@ class XabrUser(AbstractUser):
                   f'{settings.DOMAIN_NAME} перейдите по ссылке: \n{settings.DOMAIN_NAME}{verify_link}'
 
         return send_mail(title, message, settings.EMAIL_HOST_USER, [self.email], fail_silently=False)
-

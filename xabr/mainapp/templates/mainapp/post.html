@@ -35,7 +35,7 @@
                 <form class="form_comment" action="" method="post">
                     {{ form.as_p }}
                     {% csrf_token %}
-                    <p><input class="btn btn-outline-primary" type="submit" value="Добавить"></p>
+                    <input class="btn btn-outline-primary" style="float: left;" type="submit" value="Добавить">
                 </form>
                 {% else %}
                 <a class="btn btn-outline-primary" href="{% url 'auth:login' %}?next={{request.path}}" tabindex="-1"
