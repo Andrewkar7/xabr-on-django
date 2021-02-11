@@ -6,9 +6,9 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
 from pathlib import Path
 import os
+from email_setting import email_settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,7 +23,6 @@ SECRET_KEY = '5-wfh6#m^(irjt92ki2)+r#@ii2bzo=-4-urd9x=ck9a)#09qt'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -69,7 +68,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'xabr.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
@@ -78,8 +76,15 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+    # 'default': {
+    #     'NAME': 'xabr',
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'USER': 'django',
+    #     'PASSWORD': 'geekbrains',
+    #     'HOST': 'DmitryGrodzinsky-2049.postgres.pythonanywhere-services.com',
+    #     'PORT': 12049,
+    # }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -98,7 +103,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -130,21 +134,30 @@ JSON_PATH = 'mainapp/json'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGIN_URL = '/auth/login/'
-
+# Email registration
+EMAIL_FILE_PATH = 'tmp/email-messages/'
+DOMAIN_NAME = 'http://localhost:8000'
+# DOMAIN_NAME = 'http://dmitrygrodzinsky.pythonanywhere.com' # для деплоя
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '465'
+EMAIL_HOST_USER = email_settings.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = email_settings.get('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = 'Команда1'
+EMAIL_USE_SSL = True
+# EMAIL_USE_TLS = True
 
 # Backend Test
-DOMAIN_NAME = 'http://localhost:8000'
+# DOMAIN_NAME = 'http://localhost:8000'
 
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = '25'
-EMAIL_HOST_USER = 'django@xabr.local'
-EMAIL_HOST_PASSWORD = 'xabr'
-EMAIL_USE_SSL = True
-EMAIL_USE_TLS = True
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = '25'
+# EMAIL_HOST_USER = email_settings.get('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = email_settings.get('EMAIL_HOST_PASSWORD')
+# EMAIL_USE_SSL = True
+# EMAIL_USE_TLS = True
 # вариант python -m smtpd -n -c DebuggingServer localhost:25
 # EMAIL_HOST_USER, EMAIL_HOST_PASSWORD = None, None
 
 # вариант логирования сообщений почты в виде файлов вместо отправки
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = 'tmp/email-messages/'
+# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+# EMAIL_FILE_PATH = 'tmp/email-messages/'
