@@ -137,6 +137,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # Email registration
 EMAIL_FILE_PATH = 'tmp/email-messages/'
 DOMAIN_NAME = 'http://localhost:8000'
+# DOMAIN_NAME = 'http://dmitrygrodzinsky.pythonanywhere.com' # для деплоя
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '465'
 EMAIL_HOST_USER = email_settings.get('EMAIL_HOST_USER')
