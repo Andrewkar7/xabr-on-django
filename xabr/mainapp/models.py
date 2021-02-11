@@ -13,6 +13,10 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = "категория"
+        verbose_name_plural = "категории"
+
 
 class Post(models.Model):
     """класс поста"""
@@ -33,6 +37,10 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('blogapp:post_detail', args=[str(self.id)])
 
+    class Meta:
+        verbose_name = "пост"
+        verbose_name_plural = "посты"
+
 
 class Comments(models.Model):
     """класс комментариев к постам"""
@@ -51,10 +59,17 @@ class Comments(models.Model):
         ordering = ('created',)
 
     def __str__(self):
-        return "{}".format(self.user)
+        return f"{self.user}"
 
 
 class Like(models.Model):
     user = models.ForeignKey(XabrUser, on_delete=models.CASCADE)
     slug = models.SlugField(verbose_name='URL', max_length=70, default='')
     is_active = models.BooleanField(verbose_name='активна', default=True)
+
+    class Meta:
+        verbose_name = "лайк"
+        verbose_name_plural = "лайки"
+
+    def __str__(self):
+        return f"{self.user}"

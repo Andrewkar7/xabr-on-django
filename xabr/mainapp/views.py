@@ -56,14 +56,16 @@ def help(request):
 
 def category_page(request, slug):
     categories = Category.objects.filter(is_active=True)
-    new_like, created = Like.objects.get_or_create(user=request.user, slug=slug)
+    if request.user.is_authenticated:
+        new_like, created = Like.objects.get_or_create(user=request.user, slug=slug)
+    else:
+        new_like = Like.objects.all()
     if slug == '':
         category = {'slug': '', 'name': 'все'}
         posts = Post.objects.filter(is_active=True).order_by('-create_datetime')
     else:
         category = get_object_or_404(Category, slug=slug)
         posts = category.post_set.filter(is_active=True).order_by('-create_datetime')
-
     context = {
         'page_title': 'главная',
         'categories': categories,
