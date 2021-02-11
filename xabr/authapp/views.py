@@ -54,6 +54,7 @@ def register(request):
     return render(request, 'authapp/register.html', content)
 
 
+@login_required
 def read_profile(request):
     categories = Category.objects.all()
     posts = Post.objects.filter(user=request.user).order_by('-create_datetime')

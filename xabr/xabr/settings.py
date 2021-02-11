@@ -6,9 +6,9 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
 from pathlib import Path
 import os
+from email_setting import email_settings
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -135,22 +135,23 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Email registration
+EMAIL_FILE_PATH = 'tmp/email-messages/'
 DOMAIN_NAME = 'http://localhost:8000'
-EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '465'
-EMAIL_HOST_USER = 'xabr_komanda1@mail.ru'
-EMAIL_HOST_PASSWORD = ''
-DEFAULT_FROM_EMAIL = 'Xabr'
+EMAIL_HOST_USER = email_settings.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = email_settings.get('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = 'Команда1'
 EMAIL_USE_SSL = True
-EMAIL_USE_TLS = False
+# EMAIL_USE_TLS = True
 
 # Backend Test
 # DOMAIN_NAME = 'http://localhost:8000'
-#
+
 # EMAIL_HOST = 'localhost'
 # EMAIL_PORT = '25'
-# EMAIL_HOST_USER = 'django@xabr.local'
-# EMAIL_HOST_PASSWORD = 'xabr'
+# EMAIL_HOST_USER = email_settings.get('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = email_settings.get('EMAIL_HOST_PASSWORD')
 # EMAIL_USE_SSL = True
 # EMAIL_USE_TLS = True
 # вариант python -m smtpd -n -c DebuggingServer localhost:25
