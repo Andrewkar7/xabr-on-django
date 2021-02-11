@@ -1,32 +1,29 @@
 {% extends 'authapp/base.html' %}
 {% load static %}
 {% block css %}
-    <link href="{% static 'css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
-    <meta name="theme-color" content="#563d7c">
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/signin.css' %}">
+<link href="{% static 'css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
+<meta name="theme-color" content="#563d7c">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/signin.css' %}">
 {% endblock %}
 {% block container %}
-    <form class="form-horizontal form-signin" method="post">
-        <a class="h1 mb-3 font-weight-bold text-dark" href="{% url 'main:index' %}">Xabr</a>
-        <h1 class="h3 mb-3 font-weight-normal">Пожалуйста авторизируйтесь</h1>
-        {% csrf_token %}
-        {% if next %}
-            <input type="hidden" name="next" value="{{ next }}">
-        {% endif %}
-        {{ form.as_p }}
-        <br>
-        <label>
-            <input type="checkbox" value="remember-me"> Запомнить меня
-        </label>
-        <input class="form-control btn btn-lg btn-primary btn-block" type="submit" value="Войти">
-        <a href="{% url 'auth:register' %}"
-           class="btn  btn-lg btn-primary btn-block">
-            Зарегистрироваться
-        </a>
-        <p class="mt-4 mb-3 text-muted">&copy; 2020-{% now 'Y' %} Команда №1</p>
-        <ul class="list-inline">
-            <li class="list-inline-item"><a href="{% url 'main:help' %}">Помощь</a></li>
-        </ul>
-    </form>
+<form class="form-horizontal form-signin" method="post">
+    <a class="h1 mb-3 font-weight-bold text-dark" href="{% url 'main:index' %}">Xabr</a>
+    <h1 class="h3 mb-3 font-weight-normal">Пожалуйста авторизируйтесь</h1>
+    {% csrf_token %}
+    {% if next %}
+    <input type="hidden" name="next" value="{{ next }}">
+    {% endif %}
+    {{ form.as_p }}
+    <br>
+    <label>
+        <input type="checkbox" value="remember-me"> Запомнить меня
+    </label>
+    <input class="form-control btn btn-lg btn-primary btn-block" type="submit" value="Войти">
+    <a href="{% url 'auth:register' %}"
+       class="btn  btn-lg btn-primary btn-block">
+        Зарегистрироваться
+    </a>
+    <p class="mt-4 mb-3 text-muted">&copy; 2020-{% now 'Y' %} Команда №1</p>
+</form>
 {% endblock %}

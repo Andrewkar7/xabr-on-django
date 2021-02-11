@@ -2,21 +2,31 @@
   {
     "name": "Дизайн",
     "slug": "dizajn",
-    "description": ""
+    "description": "",
+    "is_active": "True"
   },
   {
     "name": "Веб-разработка",
     "slug": "veb-razrabotka",
-    "description": ""
+    "description": "",
+    "is_active": "True"
   },
   {
     "name": "Мобильная разработка",
     "slug": "mobilnaya-razrabotka",
-    "description": ""
+    "description": "",
+    "is_active": "True"
   },
   {
     "name": "Маркетинг",
     "slug": "marketing",
-    "description": ""
+    "description": "",
+    "is_active": "True"
+  },
+  {
+    "name": "Не активная категория",
+    "slug": "marketing-new",
+    "description": "",
+    "is_active": "False"
   }
 ]
