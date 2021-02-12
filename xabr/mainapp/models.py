@@ -17,10 +17,6 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-    class Meta:
-        verbose_name = "категория"
-        verbose_name_plural = "категории"
-
 
 class Post(models.Model):
     """класс поста"""
@@ -44,10 +40,6 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('blogapp:post_detail', args=[str(self.id)])
-
-    class Meta:
-        verbose_name = "пост"
-        verbose_name_plural = "посты"
 
 
 class Comments(models.Model):
