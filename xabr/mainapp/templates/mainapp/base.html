@@ -15,8 +15,19 @@
         <link rel="stylesheet" href="{% static 'css/font-awesome/css/font-awesome.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
         <style type="text/css">
-            #id_name, #id_slug {width: 100%;}#id_description {width: 100%;height: 150px;}
-            #id_posts_text {width: 100%;height: 400px;}
+            #id_name, #id_slug {
+                width: 100%;
+            }
+
+            #id_description {
+                width: 100%;
+                height: 150px;
+            }
+
+            #id_posts_text {
+                width: 100%;
+                height: 400px;
+            }
         </style>
     {% endblock %}
     {% block js %}
@@ -38,9 +49,9 @@
 </div>
 <div>
     {% block footer %}
-    <footer class="blog-footer text-center">
-        <p>&copy; 2020-{% now 'Y' %} Команда №1 </p>
-    </footer>
+        <footer class="blog-footer text-center footer mt-auto py-3">
+            <p>&copy; 2020-{% now 'Y' %} Команда №1 </p>
+        </footer>
     {% endblock %}
 </div>
 </body>
