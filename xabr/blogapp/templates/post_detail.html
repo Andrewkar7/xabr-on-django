@@ -18,9 +18,9 @@
                 <a type="button" class="btn btn-secondary"
                    href="{% url 'blog:post_list' %}">Все статьи</a>
                 <a type="button" class="btn btn-secondary"
-                   href="{% url 'blog:post_edit' object.pk %}">Редактировать статью</a>
+                   href="{% url 'blog:post_edit' object.slug %}">Редактировать статью</a>
                 <a type="button" class="btn btn-secondary"
-                   href="{% url 'blog:post_delete' object.pk %}">Удалить статью</a>
+                   href="{% url 'blog:post_delete' object.slug %}">Удалить статью</a>
             </div>
         </div>
     </div>

@@ -19,7 +19,7 @@
                     <h3>Вы уверены, что хотите удалить "{{ post.name }}"?</h3>
                     <input class="btn btn-secondary" type="submit" value="Подтвердить удаление"/>
                     <a type="button" class="btn btn-secondary"
-                       href="{% url 'blog:post_detail' object.pk %}">Вернуться</a>
+                       href="{% url 'blog:post_detail' object.slug %}">Вернуться</a>
                 </form>
             </div>
         </div>

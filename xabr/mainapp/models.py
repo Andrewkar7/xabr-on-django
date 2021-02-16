@@ -35,7 +35,7 @@ class Post(models.Model):
         return f"{self.name} ({self.category.name})"
 
     def get_absolute_url(self):
-        return reverse('blogapp:post_detail', args=[str(self.id)])
+        return reverse('blogapp:post_detail', kwargs={'slug': self.slug})
 
     class Meta:
         verbose_name = "пост"

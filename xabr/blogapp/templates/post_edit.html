@@ -42,9 +42,9 @@
                 </div>
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <a type="button" class="btn btn-secondary"
-                       href="{% url 'blog:post_detail' object.pk %}">Смотреть статью</a>
+                       href="{% url 'blog:post_detail' object.slug %}">Смотреть статью</a>
                     <a type="button" class="btn btn-secondary"
-                       href="{% url 'blog:post_delete' object.pk %}">Удалить статью</a>
+                       href="{% url 'blog:post_delete' object.slug %}">Удалить статью</a>
                 </div>
             </form>
         </div>
