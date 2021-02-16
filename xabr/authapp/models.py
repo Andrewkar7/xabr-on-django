@@ -19,6 +19,8 @@ class XabrUser(AbstractUser):
     activation_key = models.CharField(max_length=128, blank=True)
     activation_key_expires = models.DateTimeField(default=(now() + timedelta(hours=48)))
     like_quantity = models.PositiveIntegerField('кол-во', default=0)
+    is_active = models.BooleanField(verbose_name='активен/неактивен', default=True)
+    is_staff = models.BooleanField(verbose_name='статус персонала', default=False)
 
     def is_activation_key_expired(self):
         if now() <= self.activation_key_expires:

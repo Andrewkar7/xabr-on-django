@@ -19,7 +19,7 @@
                     <path d="M21 21l-5.2-5.2"/>
                 </svg>
             </a>
-            {% if user.is_superuser %}
+            {% if user.is_superuser or user.is_staff %}
                 <a class="admin btn btn-outline-secondary" href="{% url 'admin:index' %}">
                     Админка
                 </a>
@@ -33,7 +33,7 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="{% url 'auth:read_profile' %}">Профиль</a>
                         <a class="dropdown-item" href="{% url 'blog:post_list' %}">Мои статьи</a>
-                        <a class="dropdown-item" href="{% url 'blog:post_draft' %}">Черновик</a>
+                        <a class="dropdown-item" href="{% url 'blog:post_draft' %}">Мои черновики</a>
                         <a class="dropdown-item" href="{% url 'blog:post_new' %}">Написать статью</a>
                         <a class="dropdown-item" href="{% url 'auth:logout' %}">Выход</a>
                     </div>
