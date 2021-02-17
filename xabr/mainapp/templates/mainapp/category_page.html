@@ -29,7 +29,6 @@
                                         {{ post.like_quantity }}
                                     </button>
                                 {% endif %}
-
                             {% else %}
                                 <a class="btn btn-outline-primary" href="{% url 'auth:login' %}?next={{ request.path }}"
                                    tabindex="-1"
