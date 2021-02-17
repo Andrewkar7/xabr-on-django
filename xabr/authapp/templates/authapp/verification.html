@@ -19,7 +19,9 @@
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <strong> Верификация не пройдена. </strong>
             <a type="button" class="close" data-dismiss="alert" aria-label="Close" href="{% url 'main:index' %}"><span
-                    aria-hidden="true">&times;</span></a>
+                    aria-hidden="true">&times;</span></a><hr>
+            <a type="button" class="text-muted" href="{% url 'main:index' %}">
+            На главную</a>
         </div>
     {% endif %}
 {% endblock %}
