@@ -1,6 +1,10 @@
+import re
+import transliterate
 from django.db import models
 from django.urls import reverse
 from authapp.models import XabrUser
+from django.db.models.signals import pre_save
+from django.utils.text import slugify
 
 
 class Category(models.Model):
@@ -35,11 +39,19 @@ class Post(models.Model):
         return f"{self.name} ({self.category.name})"
 
     def get_absolute_url(self):
-        return reverse('blogapp:post_detail', kwargs={'slug': self.slug})
+        return reverse('main:index')
 
     class Meta:
         verbose_name = "пост"
         verbose_name_plural = "посты"
+
+
+def pre_save_post_receiver(sender, instance, *args, **kwargs):
+    slug = slugify(transliterate.translit(instance.name, reversed=True))
+    instance.slug = slug
+
+
+pre_save.connect(pre_save_post_receiver, sender=Post)
 
 
 class Comments(models.Model):
