@@ -32,9 +32,11 @@
                         <textarea name="posts_text" style="width: 100%; height: 400px;"
                                   id="id_posts_text"> {{ object.posts_text }}
                 </textarea></p>
-                    {% if object.is_active %}
+                    {% if object.is_active == True %}
                         <p class="card-text">Статус: Опубликована </p>
                         <input class="card-text" type="radio" name="is_active" value="False"> Черновик</p>
+                    {% elif object.is_active == MD %}
+                        <input class="card-text" type="radio" name="is_active" value="MD"> Статья находится на модерации</p>
                     {% else %}
                         <p class="card-text">Статус: Черновик </p>
                         <input class="card-text" type="radio" name="is_active" value="True"> Опубликовать</p>

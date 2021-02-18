@@ -5,6 +5,8 @@ from .models import Category, Post, Comments, Like
 class PostAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('name',)}
     list_display = ('name', 'slug', 'is_active')
+    list_filter = ('is_active',)
+    search_fields = ('name', 'category__name')
 
 
 admin.site.register(Category, PostAdmin)
