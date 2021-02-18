@@ -14,7 +14,7 @@ def get_activation_key_express():
 
 class XabrUser(AbstractUser):
     avatar = models.ImageField(upload_to='users_avatars', blank=True)
-    age = models.PositiveIntegerField(verbose_name='возраст', default=18)
+    age = models.PositiveIntegerField(verbose_name='возраст', default=18, blank=True)
     aboutMe = models.TextField(verbose_name='о себе', max_length=512, blank=True)
     email = models.EmailField(verbose_name='email', unique=True, blank=False)
     activation_key = models.CharField(max_length=128, blank=True)
