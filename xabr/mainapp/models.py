@@ -7,6 +7,8 @@ from django.db.models.signals import pre_save
 from django.utils.text import slugify
 from unidecode import unidecode
 from django.template import defaultfilters
+import random
+import string
 
 
 class Category(models.Model):
@@ -48,9 +50,19 @@ class Post(models.Model):
         verbose_name_plural = "посты"
 
 
+def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
+
+
 def pre_save_post_receiver(sender, instance, *args, **kwargs):
     slug = defaultfilters.slugify(unidecode(instance.name))
-    instance.slug = slug
+    slugs = Post.objects.filter()
+    for slug_old in slugs.values("slug"):
+        if slug in slug_old["slug"]:
+            instance.slug = "%s-%s" % (slug, random_string_generator(size=4))
+            break
+        else:
+            instance.slug = slug
 
 
 pre_save.connect(pre_save_post_receiver, sender=Post)
