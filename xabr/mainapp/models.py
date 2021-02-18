@@ -5,6 +5,8 @@ from django.urls import reverse
 from authapp.models import XabrUser
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
+from unidecode import unidecode
+from django.template import defaultfilters
 
 
 class Category(models.Model):
@@ -47,7 +49,7 @@ class Post(models.Model):
 
 
 def pre_save_post_receiver(sender, instance, *args, **kwargs):
-    slug = slugify(transliterate.translit(instance.name, reversed=True))
+    slug = defaultfilters.slugify(unidecode(instance.name))
     instance.slug = slug
 
 
