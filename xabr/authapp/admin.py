@@ -17,4 +17,6 @@ class XabrUserAdmin(admin.ModelAdmin):
         return {name: (func, name, desc) for func, name, desc in actions}
 
 
+
+
 admin.site.register(XabrUser, XabrUserAdmin)
