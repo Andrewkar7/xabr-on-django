@@ -144,3 +144,5 @@ EMAIL_HOST_USER = email_settings.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = email_settings.get('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = 'Команда1'
 EMAIL_USE_SSL = True
+
+

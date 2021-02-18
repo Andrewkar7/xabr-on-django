@@ -2,6 +2,12 @@ from django.db import models
 from django.urls import reverse
 from authapp.models import XabrUser
 
+MD = 'MD'
+STATUS_CHOICES = (
+    ('True', 'is_active'),
+    ('MD', 'on_moderation'),
+    ('False', 'not_is_active'),
+)
 
 class Category(models.Model):
     """класс категории поста"""
@@ -20,6 +26,7 @@ class Category(models.Model):
 
 class Post(models.Model):
     """класс поста"""
+
     user = models.ForeignKey(XabrUser, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, verbose_name='категория', on_delete=models.CASCADE)
     name = models.CharField(verbose_name='название статьи', max_length=128)
@@ -28,7 +35,7 @@ class Post(models.Model):
     posts_text = models.TextField(verbose_name='текст статьи', blank=True)
     create_datetime = models.DateTimeField(verbose_name='дата создания', auto_now_add=True, blank=True)
     like_quantity = models.PositiveIntegerField('кол-во', default=0)
-    is_active = models.BooleanField(verbose_name='активна', default=False)
+    is_active = models.CharField(verbose_name='статус', max_length=128, choices=STATUS_CHOICES)
     comment = models.TextField(verbose_name='комментарии', blank=True)
 
     class Meta:
