@@ -12,10 +12,10 @@ def login(request):
     title = 'вход'
     next = request.GET['next'] if 'next' in request.GET.keys() else ''
     login_form = XabrUserLoginForm(data=request.POST)
+
     if request.method == 'POST' and login_form.is_valid():
         username = request.POST['username']
         password = request.POST['password']
-
         user = auth.authenticate(username=username, password=password)
         if user and user.is_active:
             auth.login(request, user)
@@ -35,6 +35,7 @@ def logout(request):
 
 def register(request):
     next = request.GET['next'] if 'next' in request.GET.keys() else ''
+
     if request.method == 'POST':
         register_form = XabrUserRegisterForm(request.POST, request.FILES)
         if register_form.is_valid():
@@ -60,6 +61,7 @@ def read_profile(request):
     categories = Category.objects.all()
     posts = Post.objects.filter(user=request.user).order_by('-create_datetime')
     user = request.user
+
     content = {
         'title': 'Профиль пользователя',
         'user': user,

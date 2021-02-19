@@ -10,7 +10,7 @@ from authapp.models import XabrUser
 
 def load_from_json(file_name):
     with open(os.path.join(settings.JSON_PATH, f'{file_name}.json'),
-            encoding='utf-8') as infile:
+              encoding='utf-8') as infile:
         return json.load(infile)
 
 
@@ -23,24 +23,14 @@ class Command(BaseCommand):
         Category.objects.all().delete()
         [Category.objects.create(**category) for category in categories]
 
-
         if not XabrUser.objects.filter(username='django').exists():
-            #создаю суперпользователя
             XabrUser.objects.create_superuser(username='django', email='admin@xabr.local', password='geekbrains')
 
         posts = load_from_json('posts')
         Post.objects.all().delete()  # all() -> QuerySet -> .first() -> concrete object
         for post in posts:
             category_name = post['category']
-            # Получаем категорию по имени
-            # _category = Category.objects.get(name=category_name)
-            # _category = Category.objects.filter(name=category_name).first()   # хороший способ
-            # _category = list(Category.objects.filter(name=category_name))[0] - не самый лучший вариант
-            _category = Category.objects.get(name=category_name)  # .get() -> concrete object возможно придется прописывать с try
-
-            # Заменяем название категории объектом
+            _category = Category.objects.get(name=category_name)
             post['category'] = _category
             new_post = Post(**post)
             new_post.save()
-
-
