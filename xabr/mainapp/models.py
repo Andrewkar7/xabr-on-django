@@ -43,7 +43,8 @@ class Post(models.Model):
     posts_text = models.TextField(verbose_name='текст статьи', blank=True)
     create_datetime = models.DateTimeField(verbose_name='дата создания', auto_now_add=True, blank=True)
     like_quantity = models.PositiveIntegerField('кол-во', default=0)
-    is_active = models.CharField(verbose_name='статус', max_length=128, choices=STATUS_CHOICES, default='True')
+    is_active = models.CharField(verbose_name='статус', max_length=128, choices=STATUS_CHOICES, default='False')
+    # is_active = models.BooleanField(verbose_name='активна', default=False)
     comment = models.TextField(verbose_name='комментарии', blank=True)
 
     class Meta:

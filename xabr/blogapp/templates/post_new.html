@@ -16,7 +16,11 @@
                     <p class="card-text">Краткое описание статьи:{{ form.description }}</p>
                     <p class="card-text">Текст статьи:{{ form.posts_text }}</p>
                     <p class="card-text">{{ form.errors }}</p>
-                    <p class="card-text">Выберите статус: {{ form.is_active }}</p>
+
+                    {% if form.is_active  %}
+                    <input class="card-text" type="radio" name="is_active" value="False" checked> Черновик</p>
+                    <input class="card-text" type="radio" name="is_active" value="MD"> На модерацию</p>
+                    {% endif %}
                 </div>
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <input class="btn btn-secondary" type="submit" value="Сохранить"/>

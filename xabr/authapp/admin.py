@@ -1,7 +1,4 @@
 from django.contrib import admin
-from django.contrib.admin.options import IS_POPUP_VAR
-from django.contrib.auth.models import Permission
-from django.contrib.contenttypes.models import ContentType
 
 from .models import XabrUser
 
@@ -10,10 +7,23 @@ class XabrUserAdmin(admin.ModelAdmin):
     list_display = ('email', 'is_active', 'is_staff')
     list_editable = ('is_active',)
 
-    def has_change_permission(self, request, obj=None):
-        obj = XabrUser.objects.filter(is_active=True)
-        if obj:
-            return True
-        return False
+    def get_form(self, request, obj=None, **kwargs):
+        form = super().get_form(request, obj, **kwargs)
+        is_superuser = request.user.is_superuser
+        if not is_superuser:
+            form.base_fields['username'].disabled = True
+            form.base_fields['password'].disabled = True
+            form.base_fields['is_superuser'].disabled = True
+            form.base_fields['avatar'].disabled = True
+            form.base_fields['age'].disabled = True
+            form.base_fields['email'].disabled = True
+            form.base_fields['activation_key'].disabled = True
+            form.base_fields['activation_key_expires'].disabled = True
+            form.base_fields['like_quantity'].disabled = True
+            form.base_fields['is_staff'].disabled = True
+            form.base_fields['groups'].disabled = True
+            form.base_fields['user_permissions'].disabled = True
+        return form
+
 
 admin.site.register(XabrUser, XabrUserAdmin)
