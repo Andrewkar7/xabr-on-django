@@ -27,11 +27,11 @@
                 </textarea></p>
                 <p class="card-text">{{ form.errors }}</p>
                 {% if object.is_active %}
-                <p class="card-text">Статус: Опубликована </p>
-                <input class="card-text" type="radio" name="is_active" value="False"> Черновик</p>
+                <p class="card-text">Статус: На модерации </p>
+                <input class="card-text" type="radio" name="is_active" value="MD"> Черновик</p>
                 {% else %}
                 <p class="card-text">Статус: Черновик </p>
-                <input class="card-text" type="radio" name="is_active" value="True"> Опубликовать</p>
+                <input class="card-text" type="radio" name="is_active" value="False"> На модерацию</p>
                 {% endif %}
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <input class="btn btn-secondary" type="submit" value="Обновить"/>

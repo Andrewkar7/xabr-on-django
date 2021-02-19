@@ -3,20 +3,21 @@
 {% load my_tags %}
 {% block main %}
 <div class="mt-3 posts text-left">
-    <h3 class="text-center"> Ваши опубликованые статьи на Xabr:</h3>
-    {% if not_post.exists %}
+    <h3 class="text-center"> Ваши статьи на Xabr:</h3>
     {% for object in object_list %}
     {% if object.user.first_name == request.user.first_name%}
     <div class="card ">
+        <div {% if object.is_active%} class="card-header bg-primary" {% else %} class="card-header bg-danger" {% endif %}>
+            Статус: {{ object.is_active }}
+        </div>
         <div class="card-header">
             Категория: {{ object.category }}
         </div>
         <div class="card-body">
-            <h5 class="card-title">Название статьи: <a href="#">{{ object.name }}</a></h5>
+            <h5 class="card-title">{{ object.name }}</h5>
             <footer class="blockquote-footer">Статья создана <cite title="Source Title">{{ object.create_datetime }}
             </cite></footer>
-            <p class="card-text">Краткое описание статьи: {{ object.description }}</p>
-            <p class="card-text">Текст статьи: {{ object.posts_text }}</p>
+            <p class="card-text"> {{ object.description }}</p>
             <div class="btn-group" role="group" aria-label="Basic example">
                 <a type="button" class="btn btn-secondary"
                    href="{% url 'blog:post_detail' object.slug %}">Смотреть статью</a>
@@ -29,12 +30,5 @@
     </div>
     {% endif %}
     {% endfor %}
-    {% else %}
-    <div class="posts text-center">
-        <h4>У Вас пока нет статей</h4>
-        <a type="button" class="btn btn-secondary"
-           href="{% url 'blog:post_new' %}">Написать статью</a>
-    </div>
-    {% endif %}
 </div>
 {% endblock %}

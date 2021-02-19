@@ -44,7 +44,6 @@ def register(request):
                 return HttpResponseRedirect(reverse('auth:send_confirm'))
             else:
                 print('ошибка отправки сообщения')
-            # return HttpResponseRedirect(reverse('auth:login'))
             return HttpResponseRedirect(reverse('mainapp:index'))
     else:
         register_form = XabrUserRegisterForm()
