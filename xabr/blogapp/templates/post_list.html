@@ -27,4 +27,14 @@
             </div>
         </div>
     </div>
+    {% endif %}
+    {% endfor %}
+    {% else %}
+    <div class="posts text-center">
+        <h4>У Вас пока нет статей</h4>
+        <a type="button" class="btn btn-secondary"
+           href="{% url 'blog:post_new' %}">Написать статью</a>
+    </div>
+    {% endif %}
+</div>
 {% endblock %}

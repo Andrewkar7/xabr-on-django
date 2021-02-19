@@ -24,10 +24,17 @@
            class="btn  btn-lg btn-primary btn-block">
             Зарегистрироваться
         </a>
-        <a href="{{ next }}"
-           class="btn  btn-lg btn-primary btn-block">
-            Вернуться назад
-        </a>
+        {% if next == '/auth/register/' %}
+            <a href="{% url 'main:index' %}"
+               class="btn  btn-lg btn-primary btn-block">
+                Вернуться на главную
+            </a>
+        {% else %}
+            <a href="{{ next }}"
+               class="btn  btn-lg btn-primary btn-block">
+                Вернуться назад
+            </a>
+        {% endif %}
         <p class="mt-4 mb-3 text-muted">&copy; 2020-{% now 'Y' %} Команда №1</p>
     </form>
 {% endblock %}
