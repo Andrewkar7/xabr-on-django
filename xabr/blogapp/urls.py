@@ -2,7 +2,6 @@ from django.urls import path
 from .views import BlogListView, BlogDetailView, BlogCreateView, BlogUpdateView, BlogDeleteView
 from django.contrib.auth.decorators import login_required
 
-
 app_name = 'blog'
 
 urlpatterns = [

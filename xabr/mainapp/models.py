@@ -17,6 +17,12 @@ STATUS_CHOICES = (
     ('False', 'not_is_active'),
 )
 
+MD = 'MD'
+STATUS_CHOICES = (
+    ('True', 'is_active'),
+    ('MD', 'on_moderation'),
+    ('False', 'not_is_active'),
+)
 
 class Category(models.Model):
     """класс категории поста"""
@@ -103,6 +109,3 @@ class Like(models.Model):
     class Meta:
         verbose_name = "лайк"
         verbose_name_plural = "лайки"
-
-    def __str__(self):
-        return f"{self.user}"
