@@ -1,6 +1,14 @@
+import re
+import transliterate
 from django.db import models
 from django.urls import reverse
 from authapp.models import XabrUser
+from django.db.models.signals import pre_save
+from django.utils.text import slugify
+from unidecode import unidecode
+from django.template import defaultfilters
+import random
+import string
 
 
 class Category(models.Model):
@@ -39,7 +47,25 @@ class Post(models.Model):
         return f"{self.name} ({self.category.name})"
 
     def get_absolute_url(self):
-        return reverse('blogapp:post_detail', args=[str(self.id)])
+        return reverse('main:index')
+
+
+def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
+
+
+def pre_save_post_receiver(sender, instance, *args, **kwargs):
+    slug = defaultfilters.slugify(unidecode(instance.name))
+    slugs = Post.objects.filter()
+    for slug_old in slugs.values("slug"):
+        if slug in slug_old["slug"]:
+            instance.slug = "%s-%s" % (slug, random_string_generator(size=4))
+            break
+        else:
+            instance.slug = slug
+
+
+pre_save.connect(pre_save_post_receiver, sender=Post)
 
 
 class Comments(models.Model):

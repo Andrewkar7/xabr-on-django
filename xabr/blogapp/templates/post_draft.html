@@ -32,7 +32,9 @@
             <div class="posts text-center">
                 <h4>У Вас пока нет черновиков статей</h4>
                 <a type="button" class="btn btn-secondary"
-                   href="{% url 'blog:post_new' %}">Написать статью</a>
+                   href="{% url 'blog:post_edit' object.slug %}">Редактировать статью</a>
+                <a type="button" class="btn btn-secondary"
+                   href="{% url 'blog:post_delete' object.slug %}">Удалить статью</a>
             </div>
         {% endif %}
     </div>
