@@ -1,6 +1,14 @@
+import re
+import transliterate
 from django.db import models
 from django.urls import reverse
 from authapp.models import XabrUser
+from django.db.models.signals import pre_save
+from django.utils.text import slugify
+from unidecode import unidecode
+from django.template import defaultfilters
+import random
+import string
 
 MD = 'MD'
 STATUS_CHOICES = (
@@ -8,6 +16,14 @@ STATUS_CHOICES = (
     ('MD', 'on_moderation'),
     ('False', 'not_is_active'),
 )
+
+MD = 'MD'
+STATUS_CHOICES = (
+    ('True', 'Опубликована'),
+    ('MD', 'На модерации'),
+    ('False', 'Черновик'),
+)
+
 
 class Category(models.Model):
     """класс категории поста"""
@@ -44,10 +60,31 @@ class Post(models.Model):
         ordering = ('-create_datetime',)
 
     def __str__(self):
-        return f"{self.name} ({self.category.name} {self.is_active})"
+        return f"{self.name} ({self.category.name} {self.is_active} {self.slug})"
 
     def get_absolute_url(self):
-        return reverse('blogapp:post_detail', args=[str(self.id)])
+        return reverse('blogapp:post_list')
+
+
+def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
+
+
+def pre_save_post_receiver(sender, instance, *args, **kwargs):
+    if instance.slug:
+        instance.slug = instance.slug
+    else:
+        slug = defaultfilters.slugify(unidecode(instance.name))
+        slugs = Post.objects.filter()
+        for slug_old in slugs.values("slug"):
+            if slug in slug_old["slug"]:
+                instance.slug = "%s-%s" % (slug, random_string_generator(size=4))
+                break
+            else:
+                instance.slug = slug
+
+
+pre_save.connect(pre_save_post_receiver, sender=Post)
 
 
 class Comments(models.Model):
