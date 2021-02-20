@@ -29,6 +29,7 @@
                 {% if object.is_active == "True" %}
                 <p class="card-text">Статус: Опубликована </p>
                 <input class="card-text" type="radio" name="is_active" value="False"> Черновик</p>
+                <input class="card-text" type="radio" name="is_active" value="MD"> На модерации</p>
                 {% endif %}
                 {% if object.is_active == "MD" %}
                 <p class="card-text">Статус: На модерации </p>
