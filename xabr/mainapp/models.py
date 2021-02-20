@@ -19,10 +19,11 @@ STATUS_CHOICES = (
 
 MD = 'MD'
 STATUS_CHOICES = (
-    ('True', 'is_active'),
-    ('MD', 'on_moderation'),
-    ('False', 'not_is_active'),
+    ('True', 'Опубликована'),
+    ('MD', 'На модерации'),
+    ('False', 'Черновик'),
 )
+
 
 class Category(models.Model):
     """класс категории поста"""

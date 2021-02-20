@@ -7,6 +7,16 @@
     {% for object in object_list %}
     {% if object.user.first_name == request.user.first_name%}
     <div class="card ">
+        <div {% if object.is_active == "True" %}
+             class="card-header bg-success"
+             {% endif %}
+             {% if object.is_active == "MD" %}
+             class="card-header bg-warning"
+             {% else %}
+             class="card-header bg-danger"
+             {% endif %}>
+            Статус: {{ object.is_active }}
+        </div>
         <div class="card-header">
             Категория: {{ object.category }}
         </div>

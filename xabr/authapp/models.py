@@ -5,7 +5,6 @@ from django.contrib.auth.models import AbstractUser
 from django.urls import reverse
 from django.utils.timezone import now
 from xabr import settings
-from blogapp.permissions.permissions import IsUserIsStaff
 
 
 def get_activation_key_express():
