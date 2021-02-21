@@ -13,8 +13,10 @@ class SearchResultsView(ListView):
     def get_queryset(self):
         query = self.request.GET.get('search')
         object_list = Post.objects.filter(Q(is_active__icontains=True) &
-            Q(name__icontains=query) | Q(posts_text__icontains=query)
-        )
+                                          Q(name__icontains=query) |
+                                          Q(is_active__icontains=True) &
+                                          Q(posts_text__icontains=query)
+                                          ).order_by('-like_quantity', '-create_datetime')
         return object_list
 
 
