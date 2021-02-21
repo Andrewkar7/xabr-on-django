@@ -20,7 +20,7 @@
             <div class="dropdown">
                 <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ user.first_name|default:'пользователь'|title }}
+                    {{ user.first_name|default:'Администратор'|title }}
                 </a>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <a class="dropdown-item" href="{% url 'auth:read_profile' %}">Профиль</a>
