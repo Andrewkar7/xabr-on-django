@@ -17,7 +17,7 @@
             <div class="btn-group" role="group" aria-label="Basic example">
                 <form action="" method="post">{% csrf_token %}
                     <h3>Вы уверены, что хотите удалить "{{ post.name }}"?</h3>
-                    <input class="btn btn-secondary" type="submit" value="Подтвердить удаление"/>
+                    <input class="btn btn-secondary bg-danger" type="submit" value="Подтвердить удаление"/>
                     <a type="button" class="btn btn-secondary"
                        href="{% url 'blog:post_detail' object.slug %}">Вернуться</a>
                 </form>

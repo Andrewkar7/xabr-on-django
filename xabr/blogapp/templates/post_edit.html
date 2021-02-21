@@ -29,20 +29,23 @@
                 {% if object.is_active == "True" %}
                 <p class="card-text">Статус: Опубликована </p>
                 <input class="card-text" type="radio" name="is_active" value="False"> Черновик</p>
-                <input class="card-text" type="radio" name="is_active" value="MD"> На модерации</p>
+                <input class="card-text" type="radio" name="is_active" value="MD"> На модерацию</p>
                 {% endif %}
                 {% if object.is_active == "MD" %}
-                <p class="card-text">Статус: На модерации </p>
+                <p class="card-text">Статус: На модерацию </p>
                 <input class="card-text" type="radio" name="is_active" value="False"> Черновик</p>
                 {% endif %}
                 {% if object.is_active == "False" %}
                 <p class="card-text">Статус: Черновик </p>
-                <input class="card-text" type="radio" name="is_active" value="MD"> На модерации</p>
+                <input class="card-text" type="radio" name="is_active" value="False"> Черновик</p>
+                <input class="card-text" type="radio" name="is_active" value="MD"> На модерацию</p>
                 {% endif %}
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <input class="btn btn-secondary" type="submit" value="Обновить"/>
                 </div>
                 <div class="btn-group" role="group" aria-label="Basic example">
+                    <a type="button" class="btn btn-secondary"
+                       href="{% url 'blog:post_list' %}">Назад</a>
                     <a type="button" class="btn btn-secondary"
                        href="{% url 'blog:post_detail' object.slug %}">Смотреть статью</a>
                     <a type="button" class="btn btn-secondary"

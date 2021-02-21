@@ -3,8 +3,6 @@ from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy
 from mainapp.models import Post
 
-from mainapp.models import MD
-
 
 class BlogListView(ListView):
     model = Post
