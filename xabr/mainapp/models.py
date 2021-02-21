@@ -1,5 +1,3 @@
-import re
-import transliterate
 from django.db import models
 from django.urls import reverse
 from authapp.models import XabrUser
