@@ -1,4 +1,22 @@
 /* stylelint-disable selector-list-comma-newline-after */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+.clr {
+    height: 200px;
+}
+
+main > .container {
+    padding: 60px 15px 0;
+}
+
 .form_comment {
     width: 100px;
     height: 20px;
@@ -123,6 +141,21 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #f9f9f9;
     border-top: .05rem solid #e5e5e5;
 }
+
+
+.footer > .container {
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+/*.blog-footer {*/
+/*    width: 100%;*/
+/*    padding-top: 20px;*/
+/*    height: 75px;*/
+/*    text-align: center;*/
+/*    background-color: #f7f7f7;*/
+/*    margin: -75px auto 0;*/
+/*}*/
 
 .blog-footer p:last-child {
     margin-bottom: 0;
