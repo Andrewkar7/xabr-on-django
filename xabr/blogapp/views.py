@@ -8,29 +8,6 @@ class BlogListView(ListView):
     model = Post
     template_name = 'post_list.html'
 
-    def get_queryset(self):
-        qs = Post.objects.filter(is_active=True).order_by('-create_datetime')
-        return qs
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['not_post'] = Post.objects.filter(is_active=True, user=self.request.user)
-        return context
-
-
-class DraftListView(ListView):
-    model = Post
-    template_name = 'post_draft.html'
-
-    def get_queryset(self):
-        qs = Post.objects.filter(is_active=False).order_by('-create_datetime')
-        return qs
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['not_post'] = Post.objects.filter(is_active=False, user=self.request.user)
-        return context
-
 
 class BlogDetailView(DetailView):
     model = Post

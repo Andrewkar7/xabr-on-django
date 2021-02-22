@@ -13,12 +13,14 @@ def get_activation_key_express():
 
 class XabrUser(AbstractUser):
     avatar = models.ImageField(upload_to='users_avatars', blank=True)
-    age = models.PositiveIntegerField(verbose_name='возраст', default=18)
+    age = models.PositiveIntegerField(verbose_name='возраст', default=18, blank=True)
     aboutMe = models.TextField(verbose_name='о себе', max_length=512, blank=True)
     email = models.EmailField(verbose_name='email', unique=True, blank=False)
     activation_key = models.CharField(max_length=128, blank=True)
     activation_key_expires = models.DateTimeField(default=(now() + timedelta(hours=48)))
     like_quantity = models.PositiveIntegerField('кол-во', default=0)
+    is_active = models.BooleanField(verbose_name='активен/неактивен', default=True)
+    is_staff = models.BooleanField(verbose_name='статус персонала', default=False)
 
     def is_activation_key_expired(self):
         if now() <= self.activation_key_expires:

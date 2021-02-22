@@ -1,8 +1,23 @@
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-
+from django.views.generic import ListView
 from .forms import CommentForm
 from .models import Category, Post, Comments, Like
+
+
+class SearchResultsView(ListView):
+    model = Post
+    template_name = 'search_results.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('search')
+        object_list = Post.objects.filter(Q(is_active__icontains=True) &
+                                          Q(name__icontains=query) |
+                                          Q(is_active__icontains=True) &
+                                          Q(posts_text__icontains=query)
+                                          ).order_by('-like_quantity', '-create_datetime')
+        return object_list
 
 
 def index(request):
