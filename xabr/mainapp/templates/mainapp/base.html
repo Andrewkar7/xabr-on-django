@@ -36,23 +36,25 @@
         <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     {% endblock %}
 </head>
-<body>
-<div class="container">
-    {% block container %}
-        {% include 'mainapp/includes/inc__header.html' %}
-        {% include 'mainapp/includes/inc__main_menu.html' %}
-    {% endblock %}
-</div>
-<div role="main" class="container">
-    {% block main %}
-    {% endblock %}
-</div>
-<div>
+<body class="container">
+<header>
+    {% include 'mainapp/includes/inc__header.html' %}
+    {% include 'mainapp/includes/inc__main_menu.html' %}
+</header>
+<main role="main" class="flex-shrink-0">
+    <div class="container">
+        {% block main %}
+        {% endblock %}
+    </div>
+</main>
+<div class="clearfix"></div>
+<footer class="blog-footer text-center mt-auto py-3">
     {% block footer %}
-        <footer class="blog-footer text-center footer mt-auto py-3">
+        <div class="container">
             <p>&copy; 2020-{% now 'Y' %} Команда №1 </p>
-        </footer>
+            <a class="text-muted" href="{% url 'main:help' %}">Помощь</a>
+        </div>
     {% endblock %}
-</div>
+</footer>
 </body>
 </html>
