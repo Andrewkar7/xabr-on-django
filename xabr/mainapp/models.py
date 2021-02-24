@@ -18,6 +18,7 @@ STATUS_CHOICES = (
 
 class Category(models.Model):
     """класс категории поста"""
+
     name = models.CharField(verbose_name='название категории', max_length=64, default='', unique=True)
     slug = models.SlugField(verbose_name='уникальный адрес', max_length=70)
     description = models.TextField(verbose_name='описание категории', blank=True)
