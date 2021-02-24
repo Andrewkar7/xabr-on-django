@@ -24,7 +24,7 @@ def login(request):
             else:
                 return HttpResponseRedirect(reverse('main:index'))
 
-    content = {'title': title, 'form': login_form, 'next': next, }
+    content = {'title': title, 'login_form': login_form, 'next': next, }
     return render(request, 'authapp/login.html', content)
 
 
