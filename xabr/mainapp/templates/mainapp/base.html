@@ -41,20 +41,21 @@
     {% include 'mainapp/includes/inc__header.html' %}
     {% include 'mainapp/includes/inc__main_menu.html' %}
 </header>
-<main role="main" class="flex-shrink-0">
-    <div class="container">
-        {% block main %}
-        {% endblock %}
-    </div>
-</main>
-<div class="clearfix"></div>
-<footer class="blog-footer text-center mt-auto py-3">
-    {% block footer %}
+<div class="wrapper">
+    <main role="main" class="flex-shrink-0">
         <div class="container">
-            <p>&copy; 2020-{% now 'Y' %} Команда №1 </p>
-            <a class="text-muted" href="{% url 'main:help' %}">Помощь</a>
+            {% block main %}
+            {% endblock %}
         </div>
-    {% endblock %}
-</footer>
+    </main>
+    <footer class="blog-footer text-center mt-auto py-3">
+        {% block footer %}
+            <div class="container">
+                <p>&copy; 2020-{% now 'Y' %} Команда №1 </p>
+                <a class="text-muted" href="{% url 'main:help' %}">Помощь</a>
+            </div>
+        {% endblock %}
+    </footer>
+</div>
 </body>
 </html>

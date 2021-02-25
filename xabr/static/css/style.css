@@ -134,12 +134,25 @@ h1, h2, h3, h4, h5, h6 {
 /*
  * Footer
  */
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.main {
+    flex: 1 0 auto;
+}
+
+
 .blog-footer {
     padding: 2.5rem 0;
     color: #999;
     text-align: center;
     background-color: #f9f9f9;
     border-top: .05rem solid #e5e5e5;
+    flex: 0 0 auto;
 }
 
 
@@ -179,3 +192,5 @@ h1, h2, h3, h4, h5, h6 {
 .text-body {
     text-align: justify;
 }
+
+
