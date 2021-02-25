@@ -1,8 +1,25 @@
+from django.db.models import Q
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView
 
+from authapp.models import XabrUser
 from .forms import CommentForm
 from .models import Category, Post, Comments, Like
+
+
+class SearchResultsView(ListView):
+    model = Post
+    template_name = 'search_results.html'
+
+    def get_queryset(self):
+        query = self.request.GET.get('search')
+        object_list = Post.objects.filter(Q(is_active__icontains=True) &
+                                          Q(name__icontains=query) |
+                                          Q(is_active__icontains=True) &
+                                          Q(posts_text__icontains=query)
+                                          ).order_by('-like_quantity', '-create_datetime')
+        return object_list
 
 
 def index(request):
@@ -98,3 +115,20 @@ def change_like(request, slug):
         }
 
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'), context)
+
+
+def delete_comment(request):
+    id = request.POST['comment_id']
+    if request.method == 'POST':
+        comment = get_object_or_404(Comments, id=id)
+        comment.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def to_banish(request):
+    user_com = request.POST['user_id']
+    if request.method == 'POST':
+        block_user = XabrUser.objects.get(username=user_com)
+        block_user.is_active = False
+        block_user.save()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

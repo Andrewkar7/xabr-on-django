@@ -11,10 +11,19 @@
         <a class="h1 mb-3 font-weight-bold text-dark" href="{% url 'main:index' %}">Xabr</a>
         <h1 class="h3 mb-3 font-weight-normal">Пожалуйста авторизируйтесь</h1>
         {% csrf_token %}
-        {% if next %}
-            <input type="hidden" name="next" value="{{ next }}">
-        {% endif %}
-        {{ form.as_p }}
+        {% for error in login_form.non_field_errors %}
+            <div class="alert alert-danger">
+                <strong>{{ error|escape }}</strong>
+            </div>
+        {% endfor %}
+        <div class="form-group">
+            <label for="{{ login_form.username.id_for_label }}"></label>
+            {{ login_form.username }}
+        </div>
+        <div class="form-group">
+            <label for="{{ login_form.password.id_for_label }}"></label>
+            {{ login_form.password }}
+        </div>
         <br>
         <label>
             <input type="checkbox" value="remember-me"> Запомнить меня
@@ -24,10 +33,17 @@
            class="btn  btn-lg btn-primary btn-block">
             Зарегистрироваться
         </a>
-        <a href="{{ next }}"
-           class="btn  btn-lg btn-primary btn-block">
-            Вернуться назад
-        </a>
+        {% if next == '/auth/register/' %}
+            <a href="{% url 'main:index' %}"
+               class="btn  btn-lg btn-primary btn-block">
+                Вернуться на главную
+            </a>
+        {% else %}
+            <a href="{{ next }}"
+               class="btn  btn-lg btn-primary btn-block">
+                Вернуться назад
+            </a>
+        {% endif %}
         <p class="mt-4 mb-3 text-muted">&copy; 2020-{% now 'Y' %} Команда №1</p>
     </form>
 {% endblock %}

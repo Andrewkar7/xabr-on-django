@@ -17,7 +17,7 @@
                 {{ register_form.as_p }}
                 <br>
                 <input class="form-control btn  btn-lg btn-primary btn-block" type="submit" value="Зарегистрироваться">
-                <a href="{{ next }}"
+                <a href="{{ next }}?next={{ request.path }}"
                    class="btn  btn-lg btn-primary btn-block">
                     Вернуться назад
                 </a>
