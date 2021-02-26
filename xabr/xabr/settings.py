@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'mainapp',
     'authapp',
     'blogapp',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
