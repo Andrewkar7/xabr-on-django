@@ -1,18 +1,17 @@
 import hashlib
 import random
-
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 from django import forms
 from django.forms import TextInput
-
 from .models import XabrUser
 
 
 class XabrUserLoginForm(AuthenticationForm):
+    """форма аутентификации пользователя"""
+
     class Meta:
         model = XabrUser
         fields = ('username', 'password')
-
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -25,6 +24,8 @@ class XabrUserLoginForm(AuthenticationForm):
 
 
 class XabrUserRegisterForm(UserCreationForm):
+    """форма регистрации пользователя"""
+
     class Meta:
         model = XabrUser
         fields = ('username', 'first_name', 'email', 'password1', 'password2', 'age', 'avatar')
@@ -47,6 +48,8 @@ class XabrUserRegisterForm(UserCreationForm):
 
 
 class XabrUserEditForm(UserChangeForm):
+    """форма редактирования данных пользователя"""
+
     class Meta:
         model = XabrUser
         fields = ('username', 'first_name', 'email', 'age', 'aboutMe', 'avatar', 'password')
