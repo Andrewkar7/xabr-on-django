@@ -131,6 +131,9 @@ STATICFILES_DIRS = (
     'static',
 )
 
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
+MEDIA_URL = '/media/'
+
 AUTH_USER_MODEL = 'authapp.XabrUser'
 
 LOGIN_URL = '/auth/login/'
@@ -139,6 +142,11 @@ JSON_PATH = 'mainapp/json'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
 
 # Email registration
 EMAIL_FILE_PATH = 'tmp/email-messages/'

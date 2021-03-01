@@ -53,7 +53,7 @@ class Post(models.Model):
         ordering = ('-create_datetime',)
 
     def __str__(self):
-        return f"{self.name} ({self.category.name} {self.is_active} {self.slug})"
+        return f"{self.name} ({self.category.name} {self.is_active} {self.slug} {self.user})"
 
     def get_absolute_url(self):
         return reverse('blogapp:post_list')

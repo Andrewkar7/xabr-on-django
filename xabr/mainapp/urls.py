@@ -12,6 +12,4 @@ urlpatterns = [
     path('search/', mainapp.SearchResultsView.as_view(), name='search_results'),
     path('delete/comment/', mainapp.delete_comment, name='delete_comment'),
     path('to/banish/', mainapp.to_banish, name='to_banish'),
-    path('to/banish/', mainapp.to_banish, name='to_banish'),
-    path('doc/', mainapp.doc, name='to_banish'),
 ]

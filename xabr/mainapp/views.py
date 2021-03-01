@@ -27,7 +27,6 @@ class SearchResultsView(ListView):
         return object_list
 
 
-
 def index(request):
     """контроллер, возврящающий главную страницу со списком всех статей сайта"""
 
@@ -154,9 +153,3 @@ def to_banish(request):
         block_user.is_active = False
         block_user.save()
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-
-def doc(request):
-    """контроллер вывода страницы "Документация" """
-
-    return render(request, 'doc/build/html/index.html')
