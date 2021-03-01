@@ -4,11 +4,11 @@
 <div class="row">
     <div class="col-md-12">
         {% for post in posts %}
-        <h3 class="pb-4 mb-4 blog-main font-italic border-bottom">
+        <h4 class="pb-4 mb-4 blog-main border-bottom">
             {{ post.category }}
-        </h3>
+        </h4>
         <div class="blog-post">
-            <h1 class="blog-post-title">{{ post.name }}</h1>
+            <h2 class="blog-post">{{ post.name }}</h2>
             <p class="blog-post-meta">{{ post.create_datetime }} автор: {{ post.user|title }}</p>
             <hr>
             <p>{{ post.posts_text }}</p>
