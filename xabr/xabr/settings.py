@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'mainapp',
     'authapp',
     'blogapp',
-
+    'doc',
 ]
 
 
