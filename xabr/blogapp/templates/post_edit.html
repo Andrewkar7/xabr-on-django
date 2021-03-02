@@ -7,24 +7,10 @@
     <div class="card ">
         <div class="card-header">
             <form action="" method="post">{% csrf_token %}
-                <div class="form-group">
-                    <p class="card-title"><label for="{{object.category}}">Категория:</label> <select
-                            name="category" required
-                            id="id_category">
-                        <option value="{{object.category.id}}" selected>{{object.category}}</option>
-                    </select></p>
-                </div>
-                <p class="card-text"><label for="id_name">Название статьи:</label></p>
-                <input type="text" class="form-control text-dark text" name="name" value="{{ object.name }}"
-                       maxlength="128"
-                       required=""
-                       id="object.name.id">
-                <p class="card-text"><label for="id_description">Краткое описание статьи:</label>
-                    <textarea name="description" style="width: 100%; height: 150px;" id="id_description">{{ object.description }}
-                </textarea></p>
-                <p class="card-text"><label for="id_posts_text">Текст статьи:</label>
-                    <textarea name="posts_text" style="width: 100%; height: 400px;" id="id_posts_text"> {{ object.posts_text }}{{ form.media }}
-                </textarea></p>
+                <p class="card-text">Категория: {{ form.category }}</p>
+                <p class="card-text">Название статьи:{{ form.name }}</p>
+                <p class="card-text">Краткое описание статьи:{{ form.description }}</p>
+                <p class="card-text">Текст статьи:{{ form.posts_text }}{{ form.media }}</p>
                 <p class="card-text">{{ form.errors }}</p>
                 {% if object.is_active == "True" %}
                 <p class="card-text">Статус: Опубликована </p>

@@ -50,8 +50,10 @@
         </header>
         <main role="main" class="flex-shrink-0">
             <div class="container">
+                {% autoescape off %}
                 {% block main %}
                 {% endblock %}
+                {% endautoescape %}
             </div>
         </main>
     </div>
