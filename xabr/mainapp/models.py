@@ -4,6 +4,7 @@ from authapp.models import XabrUser
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
 from django.template import defaultfilters
+from ckeditor_uploader.fields import RichTextUploadingField
 import random
 import string
 
@@ -40,8 +41,8 @@ class Post(models.Model):
     category = models.ForeignKey(Category, verbose_name='категория', on_delete=models.CASCADE)
     name = models.CharField(verbose_name='название статьи', max_length=128)
     slug = models.SlugField(verbose_name='уникальный адрес', max_length=70, unique=True)
-    description = models.TextField(verbose_name='краткое описание статьи', blank=True)
-    posts_text = models.TextField(verbose_name='текст статьи', blank=True)
+    description = RichTextUploadingField() # (verbose_name='краткое описание статьи', blank=True)
+    posts_text = RichTextUploadingField() # verbose_name='текст статьи', blank=True
     create_datetime = models.DateTimeField(verbose_name='дата создания', auto_now_add=True, blank=True)
     like_quantity = models.PositiveIntegerField('кол-во', default=0)
     is_active = models.CharField(verbose_name='статус', max_length=128, choices=STATUS_CHOICES)
