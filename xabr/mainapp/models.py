@@ -3,10 +3,12 @@ from django.urls import reverse
 from authapp.models import XabrUser
 from django.db.models.signals import pre_save
 from django.utils.text import slugify
-from unidecode import unidecode
 from django.template import defaultfilters
+from ckeditor_uploader.fields import RichTextUploadingField
 import random
 import string
+
+from unidecode import unidecode
 
 MD = 'MD'
 STATUS_CHOICES = (
@@ -17,7 +19,7 @@ STATUS_CHOICES = (
 
 
 class Category(models.Model):
-    """класс категории поста"""
+    """модель категории поста"""
 
     name = models.CharField(verbose_name='название категории', max_length=64, default='', unique=True)
     slug = models.SlugField(verbose_name='уникальный адрес', max_length=70)
@@ -33,14 +35,14 @@ class Category(models.Model):
 
 
 class Post(models.Model):
-    """класс поста"""
+    """модель статьи"""
 
     user = models.ForeignKey(XabrUser, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, verbose_name='категория', on_delete=models.CASCADE)
     name = models.CharField(verbose_name='название статьи', max_length=128)
     slug = models.SlugField(verbose_name='уникальный адрес', max_length=70, unique=True)
-    description = models.TextField(verbose_name='краткое описание статьи', blank=True)
-    posts_text = models.TextField(verbose_name='текст статьи', blank=True)
+    description = RichTextUploadingField() # (verbose_name='краткое описание статьи', blank=True)
+    posts_text = RichTextUploadingField() # verbose_name='текст статьи', blank=True
     create_datetime = models.DateTimeField(verbose_name='дата создания', auto_now_add=True, blank=True)
     like_quantity = models.PositiveIntegerField('кол-во', default=0)
     is_active = models.CharField(verbose_name='статус', max_length=128, choices=STATUS_CHOICES)
@@ -52,17 +54,21 @@ class Post(models.Model):
         ordering = ('-create_datetime',)
 
     def __str__(self):
-        return f"{self.name} ({self.category.name} {self.is_active} {self.slug})"
+        return f"{self.name} ({self.category.name} {self.is_active} {self.slug} {self.user})"
 
     def get_absolute_url(self):
         return reverse('blogapp:post_list')
 
 
 def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):
+    """функция, генерирующая набор случайных строковых символов"""
+
     return ''.join(random.choice(chars) for _ in range(size))
 
 
 def pre_save_post_receiver(sender, instance, *args, **kwargs):
+    """функция получения и сохранения уникального slug"""
+
     if instance.slug:
         instance.slug = instance.slug
     else:
@@ -80,7 +86,8 @@ pre_save.connect(pre_save_post_receiver, sender=Post)
 
 
 class Comments(models.Model):
-    """класс комментариев к постам"""
+    """модель комментариев к постам"""
+
     user = models.ForeignKey(XabrUser, verbose_name="пользователь", related_name="comments", on_delete=models.CASCADE)
     post = models.ForeignKey(Post, verbose_name="пост", on_delete=models.CASCADE)
     text = models.TextField("комментировать")
@@ -98,6 +105,8 @@ class Comments(models.Model):
 
 
 class Like(models.Model):
+    """модель лайков к постам"""
+
     user = models.ForeignKey(XabrUser, on_delete=models.CASCADE)
     slug = models.SlugField(verbose_name='URL', max_length=70, default='')
     is_active = models.BooleanField(verbose_name='активна', default=True)

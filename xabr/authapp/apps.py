@@ -2,5 +2,7 @@ from django.apps import AppConfig
 
 
 class InterstoreAppConfig(AppConfig):
-    name = "authapp"             # Здесь указываем исходное имя приложения
-    verbose_name = "аутентификация"         # А здесь, имя которое необходимо отобразить в админке
+    """ присвоение verbose_name приложению authapp в административной панели"""
+
+    name = "authapp"
+    verbose_name = "аутентификация"

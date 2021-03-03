@@ -8,10 +8,14 @@ from xabr import settings
 
 
 def get_activation_key_express():
+    """функция для получения ключа активации пользователя"""
+
     return now() + timedelta(hours=48)
 
 
 class XabrUser(AbstractUser):
+    """модель пользователя"""
+
     avatar = models.ImageField(upload_to='users_avatars', blank=True)
     age = models.PositiveIntegerField(verbose_name='возраст', default=18, blank=True)
     aboutMe = models.TextField(verbose_name='о себе', max_length=512, blank=True)
@@ -23,12 +27,15 @@ class XabrUser(AbstractUser):
     is_staff = models.BooleanField(verbose_name='статус персонала', default=False)
 
     def is_activation_key_expired(self):
+        """функция активации пользователя"""
         if now() <= self.activation_key_expires:
             return False
         else:
             return True
 
     def send_verify_mail(self):
+        """функция подтверждения учетной записи"""
+
         verify_link = reverse(
             'auth:verify',
             kwargs={

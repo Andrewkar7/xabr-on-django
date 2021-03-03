@@ -9,6 +9,8 @@ from mainapp.models import Category, Post
 
 
 def login(request):
+    """контроллер для выводв страницы авторизации/регистрации пользователя"""
+
     title = 'вход'
     next = request.GET['next'] if 'next' in request.GET.keys() else ''
     login_form = XabrUserLoginForm(data=request.POST)
@@ -29,11 +31,15 @@ def login(request):
 
 
 def logout(request):
+    """контроллер выхода пользователя из личного кабинета"""
+
     auth.logout(request)
     return HttpResponseRedirect(reverse('main:index'))
 
 
 def register(request):
+    """контроллер для вывода формы регистрации (ввода данных) пользователя"""
+
     next = request.GET['next'] if 'next' in request.GET.keys() else ''
 
     if request.method == 'POST':
@@ -58,6 +64,8 @@ def register(request):
 
 @login_required
 def read_profile(request):
+    """контроллер для вывода профиля пользователя"""
+
     categories = Category.objects.all()
     posts = Post.objects.filter(user=request.user).order_by('-create_datetime')
     user = request.user
@@ -73,6 +81,8 @@ def read_profile(request):
 
 @login_required
 def edit(request):
+    """функция для редактирования профиля пользователя"""
+
     title = 'редактирование'
 
     if request.method == 'POST':
@@ -92,6 +102,8 @@ def edit(request):
 
 
 def verify(request, email, activation_key):
+    """контроллер для вывода подтверждения/не подтверждения регистрации"""
+
     try:
         user = XabrUser.objects.get(email=email)
         if user.activation_key == activation_key and not user.is_activation_key_expired():

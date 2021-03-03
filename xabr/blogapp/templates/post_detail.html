@@ -22,8 +22,8 @@
             <h5 class="card-title">Название статьи: <a href="#">{{ object.name }}</a></h5>
             <footer class="blockquote-footer">Статья создана <cite title="Source Title">{{ object.create_datetime }}
             </cite></footer>
-            <p class="card-text">Краткое описание статьи: {{ object.description }}</p>
-            <p class="card-text">Текст статьи: {{ object.posts_text }}</p>
+            <p class="card-text">Краткое описание статьи: {% autoescape off %}{{ object.description }}</p>
+            <p class="card-text">Текст статьи: {{ object.posts_text }}{% endautoescape %}</p>
             <div class="btn-group" role="group" aria-label="Basic example">
                 <a type="button" class="btn btn-secondary"
                    href="{% url 'blog:post_list' %}">Все статьи</a>

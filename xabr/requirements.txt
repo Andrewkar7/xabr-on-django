@@ -5,7 +5,6 @@ Pillow==8.1.0
 psycopg2==2.8.6
 psycopg2-binary==2.8.6
 pytz==2020.5
-six==1.15.0
 sqlparse==0.4.1
 transliterate==1.10.2
 Unidecode==1.2.0

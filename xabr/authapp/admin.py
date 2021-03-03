@@ -3,16 +3,23 @@ from .models import XabrUser
 
 
 class XabrUserAdmin(admin.ModelAdmin):
+    """переопределение модели XabrUser, отображающейся в административной панели"""
+
     list_display = ('username', 'email', 'is_active', 'is_staff')
     list_editable = ('is_active',)
 
     def get_queryset(self, request):
+        """функция, которая скрывает суперпользователя в административной панели
+        для всех отсальных пользователей"""
+
         qs = super(XabrUserAdmin, self).get_queryset(request)
         if not request.user.is_superuser:
             return qs.filter(is_superuser=False)
         return qs
 
     def get_form(self, request, obj=None, **kwargs):
+        """функция, органичивающая доступ можератора к редактированию пользователей"""
+
         form = super().get_form(request, obj, **kwargs)
         is_superuser = request.user.is_superuser
         if not is_superuser:

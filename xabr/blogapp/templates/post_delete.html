@@ -12,8 +12,6 @@
             <h5 class="card-title">Название статьи: <a href="#">{{ object.name }}</a></h5>
             <footer class="blockquote-footer">Статья создана <cite title="Source Title">{{ object.create_datetime }}
             </cite></footer>
-            <p class="card-text">Краткое описание статьи: {{ object.description }}</p>
-            <p class="card-text">Текст статьи: {{ object.posts_text }}</p>
             <div class="btn-group" role="group" aria-label="Basic example">
                 <form action="" method="post">{% csrf_token %}
                     <h3>Вы уверены, что хотите удалить "{{ post.name }}"?</h3>
@@ -26,3 +24,4 @@
     </div>
 </div>
 {% endblock %}
+
