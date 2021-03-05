@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'mainapp',
     'authapp',
     'blogapp',
+    'django_extensions',
     'doc',
     'ckeditor',
     'ckeditor_uploader',
