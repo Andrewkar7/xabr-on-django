@@ -1,0 +1,62 @@
+/	mainapp.views.index	main:index
+/admin/	django.contrib.admin.sites.index	admin:index
+/admin/<app_label>/	django.contrib.admin.sites.app_index	admin:app_list
+/admin/auth/group/	django.contrib.admin.options.changelist_view	admin:auth_group_changelist
+/admin/auth/group/<path:object_id>/	django.views.generic.base.RedirectView
+/admin/auth/group/<path:object_id>/change/	django.contrib.admin.options.change_view	admin:auth_group_change
+/admin/auth/group/<path:object_id>/delete/	django.contrib.admin.options.delete_view	admin:auth_group_delete
+/admin/auth/group/<path:object_id>/history/	django.contrib.admin.options.history_view	admin:auth_group_history
+/admin/auth/group/add/	django.contrib.admin.options.add_view	admin:auth_group_add
+/admin/auth/group/autocomplete/	django.contrib.admin.options.autocomplete_view	admin:auth_group_autocomplete
+/admin/authapp/xabruser/	django.contrib.admin.options.changelist_view	admin:authapp_xabruser_changelist
+/admin/authapp/xabruser/<path:object_id>/	django.views.generic.base.RedirectView
+/admin/authapp/xabruser/<path:object_id>/change/	django.contrib.admin.options.change_view	admin:authapp_xabruser_change
+/admin/authapp/xabruser/<path:object_id>/delete/	django.contrib.admin.options.delete_view	admin:authapp_xabruser_delete
+/admin/authapp/xabruser/<path:object_id>/history/	django.contrib.admin.options.history_view	admin:authapp_xabruser_history
+/admin/authapp/xabruser/add/	django.contrib.admin.options.add_view	admin:authapp_xabruser_add
+/admin/authapp/xabruser/autocomplete/	django.contrib.admin.options.autocomplete_view	admin:authapp_xabruser_autocomplete
+/admin/jsi18n/	django.contrib.admin.sites.i18n_javascript	admin:jsi18n
+/admin/login/	django.contrib.admin.sites.login	admin:login
+/admin/logout/	django.contrib.admin.sites.logout	admin:logout
+/admin/mainapp/category/	django.contrib.admin.options.changelist_view	admin:mainapp_category_changelist
+/admin/mainapp/category/<path:object_id>/	django.views.generic.base.RedirectView
+/admin/mainapp/category/<path:object_id>/change/	django.contrib.admin.options.change_view	admin:mainapp_category_change
+/admin/mainapp/category/<path:object_id>/delete/	django.contrib.admin.options.delete_view	admin:mainapp_category_delete
+/admin/mainapp/category/<path:object_id>/history/	django.contrib.admin.options.history_view	admin:mainapp_category_history
+/admin/mainapp/category/add/	django.contrib.admin.options.add_view	admin:mainapp_category_add
+/admin/mainapp/category/autocomplete/	django.contrib.admin.options.autocomplete_view	admin:mainapp_category_autocomplete
+/admin/mainapp/comments/	django.contrib.admin.options.changelist_view	admin:mainapp_comments_changelist
+/admin/mainapp/comments/<path:object_id>/	django.views.generic.base.RedirectView
+/admin/mainapp/comments/<path:object_id>/change/	django.contrib.admin.options.change_view	admin:mainapp_comments_change
+/admin/mainapp/comments/<path:object_id>/delete/	django.contrib.admin.options.delete_view	admin:mainapp_comments_delete
+/admin/mainapp/comments/<path:object_id>/history/	django.contrib.admin.options.history_view	admin:mainapp_comments_history
+/admin/mainapp/comments/add/	django.contrib.admin.options.add_view	admin:mainapp_comments_add
+/admin/mainapp/comments/autocomplete/	django.contrib.admin.options.autocomplete_view	admin:mainapp_comments_autocomplete
+/admin/mainapp/post/	django.contrib.admin.options.changelist_view	admin:mainapp_post_changelist
+/admin/mainapp/post/<path:object_id>/	django.views.generic.base.RedirectView
+/admin/mainapp/post/<path:object_id>/change/	django.contrib.admin.options.change_view	admin:mainapp_post_change
+/admin/mainapp/post/<path:object_id>/delete/	django.contrib.admin.options.delete_view	admin:mainapp_post_delete
+/admin/mainapp/post/<path:object_id>/history/	django.contrib.admin.options.history_view	admin:mainapp_post_history
+/admin/mainapp/post/add/	django.contrib.admin.options.add_view	admin:mainapp_post_add
+/admin/mainapp/post/autocomplete/	django.contrib.admin.options.autocomplete_view	admin:mainapp_post_autocomplete
+/admin/password_change/	django.contrib.admin.sites.password_change	admin:password_change
+/admin/password_change/done/	django.contrib.admin.sites.password_change_done	admin:password_change_done
+/admin/r/<int:content_type_id>/<path:object_id>/	django.contrib.contenttypes.views.shortcut	admin:view_on_site
+/auth/edit/	authapp.views.edit	auth:edit
+/auth/login/	authapp.views.login	auth:login
+/auth/logout/	authapp.views.logout	auth:logout
+/auth/read_profile/	authapp.views.read_profile	auth:read_profile
+/auth/register/	authapp.views.register	auth:register
+/auth/send/mail/confirm/	django.views.generic.base.TemplateView	auth:send_confirm
+/auth/verify/<str:email>/<str:activation_key>/	authapp.views.verify	auth:verify
+/blog/post/	blogapp.views.BlogListView	blogapp:post_list
+/blog/post/<slug:slug>/	blogapp.views.BlogDetailView	blogapp:post_detail
+/blog/post/<slug:slug>/delete/	blogapp.views.BlogDeleteView	blogapp:post_delete
+/blog/post/<slug:slug>/edit/	blogapp.views.BlogUpdateView	blogapp:post_edit
+/blog/post/new/	blogapp.views.BlogCreateView	blogapp:post_new
+/category/<slug:slug>/	mainapp.views.category_page	main:category_page
+/changelike/<slug:slug>/	mainapp.views.change_like	main:change_like
+/help/	mainapp.views.help	main:help
+/media/<path>	django.views.static.serve
+/post/<slug:slug>/	mainapp.views.post	main:post
+/search/	mainapp.views.SearchResultsView	main:search_results
