@@ -1,27 +1,13 @@
 {% extends 'authapp/base.html' %}
 {% load static %}
 {% block css %}
-<link href="{% static 'css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
-<link rel="stylesheet" href="{% static 'css/registration.css' %}">
+    <link href="{% static 'css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}">
 {% endblock %}
 {% block container %}
-<div class="py-5 text-center">
-    <a class="h1 mb-3 font-weight-bold text-dark" href="{% url 'main:index' %}">Xabr</a>
-    <h2>Регистрация</h2>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <form class="form-horizontal" action="{% url 'auth:register' %}" method="post"
-              enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ register_form.as_p }}
-            <br>
-            <input class="form-control btn  btn-lg btn-primary btn-block" type="submit" value="Зарегистрироваться">
-            <a href="{{ next }}?next={{ request.path }}"
-               class="btn  btn-lg btn-primary btn-block">
-                Вернуться назад
-            </a>
-        </form>
+    <div class="py-5 text-center">
+        <a class="h1 mb-3 font-weight-bold text-dark" href="{% url 'main:index' %}">Xabr</a>
+        <h2>Регистрация</h2>
     </div>
     <div class="row">
         <div class="col-md-12">
