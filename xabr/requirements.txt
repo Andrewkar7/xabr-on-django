@@ -7,7 +7,6 @@ Pillow==8.1.0
 psycopg2==2.8.6
 psycopg2-binary==2.8.6
 pydot==1.4.2
-pyparsing==3.0.0b2
 pytz==2020.5
 sqlparse==0.4.1
 transliterate==1.10.2
